@@ -42,10 +42,12 @@ public class Player : MonoBehaviour
             if (_levantando == true)
             {
                 _levantando = false;
-                if (_eje != null)
-                {
-                    Destroy(_eje);
-                }
+                //if (_eje != null)
+                //{
+                //    Destroy(_eje);
+                //}
+                Rigidbody2D _rbObjeto_rb = _objetoRayCast.GetComponent<Rigidbody2D>();
+                _rbObjeto_rb.simulated = true;
 
                 _objetoRayCast.transform.SetParent(null);
 
@@ -110,10 +112,12 @@ public class Player : MonoBehaviour
         if (_rbObjeto_rb != null)
         {
             _rbObjeto_rb.Sleep();
-            _eje = gameObject.AddComponent<FixedJoint2D>();
-            _eje.connectedAnchor = new Vector2(0, -1.6f);
-            _eje.connectedBody = _rbObjeto_rb;
-            _eje.autoConfigureConnectedAnchor = false;
+            _rbObjeto_rb.simulated = false;
+
+            // _eje = gameObject.AddComponent<FixedJoint2D>();
+            // _eje.connectedAnchor = new Vector2(0, -1.6f);
+            // _eje.connectedBody = _rbObjeto_rb;
+            // _eje.autoConfigureConnectedAnchor = false;
         }
 
         _Objeto_go.transform.SetParent(transform);
