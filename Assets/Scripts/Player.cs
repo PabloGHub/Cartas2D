@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
         {
             _rbObjeto_rb.Sleep();
             _joint = gameObject.AddComponent<FixedJoint2D>();
+            _joint.connectedAnchor = new Vector2(0, -1.6f);
             _joint.connectedBody = _rbObjeto_rb;
             _joint.autoConfigureConnectedAnchor = false;
             _joint.connectedAnchor = new Vector2(0, -1.6f);
