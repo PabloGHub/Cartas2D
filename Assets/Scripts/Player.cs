@@ -42,10 +42,6 @@ public class Player : MonoBehaviour
             if (_levantando == true)
             {
                 _levantando = false;
-                //if (_eje != null)
-                //{
-                //    Destroy(_eje);
-                //}
                 Rigidbody2D _rbObjeto_rb = _objetoRayCast.GetComponent<Rigidbody2D>();
                 _rbObjeto_rb.simulated = true;
 
@@ -62,7 +58,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                RaycastHit2D _hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), _paLante_v2, 100, ~layerMask);
+                RaycastHit2D _hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), _paLante_v2, 2, layerMask);
                 if (_hit1.collider != null)
                 {
                     Debug.Log("El rayo1 ha colisionado con: " + _hit1.collider.name);
@@ -72,7 +68,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), _paLante_v2, 100, ~layerMask);
+                RaycastHit2D _hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), _paLante_v2, 2, layerMask);
                 if (_hit2.collider != null)
                 {
                     Debug.Log("El rayo2 ha colisionado con: " + _hit2.collider.name);
@@ -82,7 +78,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit3 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), _paLante_v2, 100, ~layerMask);
+                RaycastHit2D _hit3 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), _paLante_v2, 2, layerMask);
                 if (_hit3.collider != null)
                 {
                     Debug.Log("El rayo3 ha colisionado con: " + _hit3.collider.name);
@@ -92,7 +88,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit4 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1), _paLante_v2, 100, ~layerMask);
+                RaycastHit2D _hit4 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1), _paLante_v2, 2, layerMask);
                 if (_hit4.collider != null)
                 {
                     Debug.Log("El rayo4 ha colisionado con: " + _hit4.collider.name);
@@ -113,15 +109,9 @@ public class Player : MonoBehaviour
         {
             _rbObjeto_rb.Sleep();
             _rbObjeto_rb.simulated = false;
-
-            // _eje = gameObject.AddComponent<FixedJoint2D>();
-            // _eje.connectedAnchor = new Vector2(0, -1.6f);
-            // _eje.connectedBody = _rbObjeto_rb;
-            // _eje.autoConfigureConnectedAnchor = false;
         }
 
         _Objeto_go.transform.SetParent(transform);
-
-        //_Objeto_go.transform.localPosition = new Vector3(0, 0.9f, 0);
+        _Objeto_go.transform.localPosition = new Vector3(0, 1.5f, 0);
     }
 }
