@@ -66,30 +66,37 @@ public class Player : MonoBehaviour
                     Debug.Log("El rayo1 ha colisionado con: " + _hit1.collider.name);
                     cogerObjeto(_hit1.collider.gameObject);
                     _objetoRayCast = _hit1.collider.gameObject;
+
                     return;
                 }
+
                 RaycastHit2D _hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), _paLante_v2, 100, ~layerMask);
-                else if (_hit2.collider != null)
+                if (_hit2.collider != null)
                 {
                     Debug.Log("El rayo2 ha colisionado con: " + _hit2.collider.name);
                     cogerObjeto(_hit2.collider.gameObject);
                     _objetoRayCast = _hit2.collider.gameObject;
+
                     return;
                 }
+
                 RaycastHit2D _hit3 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), _paLante_v2, 100, ~layerMask);
-                else if (_hit3.collider != null)
+                if (_hit3.collider != null)
                 {
                     Debug.Log("El rayo3 ha colisionado con: " + _hit3.collider.name);
                     cogerObjeto(_hit3.collider.gameObject);
                     _objetoRayCast = _hit3.collider.gameObject;
+
                     return;
                 }
+
                 RaycastHit2D _hit4 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1), _paLante_v2, 100, ~layerMask);
-                else if (_hit4.collider != null)
+                if (_hit4.collider != null)
                 {
                     Debug.Log("El rayo4 ha colisionado con: " + _hit4.collider.name);
                     cogerObjeto(_hit4.collider.gameObject);
                     _objetoRayCast = _hit4.collider.gameObject;
+
                     return;
                 }
             }
