@@ -110,8 +110,10 @@ public class Player : MonoBehaviour
             _rbObjeto_rb.Sleep();
             _rbObjeto_rb.simulated = false;
         }
+        float alturaObjeto = _Objeto_go.GetComponent<Renderer>().bounds.size.y;
 
         _Objeto_go.transform.SetParent(transform);
-        _Objeto_go.transform.localPosition = new Vector3(0, 1.5f, 0);
+        _Objeto_go.transform.rotation = Quaternion.identity;
+        _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
     }
 }
