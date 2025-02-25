@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey("a"))
         {
-            _rb.AddForce(new Vector2(-1000F * Time.deltaTime, 0));
+            _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
             _spriteRenderer.flipX = true;
 
             Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("d"))
         {
-            _rb.AddForce(new Vector2(1000F * Time.deltaTime, 0));
+            _rb.AddForce(new Vector2(1000f * Time.deltaTime, 0));
             _spriteRenderer.flipX = false;
 
             Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("w"))
         {
-            _rb.AddForce(new Vector2(0f , 100000F * Time.deltaTime));       
+            _rb.AddForce(new Vector2(0f , (100000f * 6) * Time.deltaTime));       
         }
 
         if (Input.GetKeyDown("f"))
