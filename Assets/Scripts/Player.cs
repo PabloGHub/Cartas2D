@@ -6,9 +6,11 @@ public class Player : MonoBehaviour
     Rigidbody2D _rb;
     SpriteRenderer _spriteRenderer;
     public LayerMask layerMask;
+    public float jumpForce;
 
     // VARs //
     bool _levantando = false;
+    bool canJump;
     GameObject _objetoRayCast;
     FixedJoint2D _eje;
 
@@ -32,6 +34,11 @@ public class Player : MonoBehaviour
         {
             _rb.AddForce(new Vector2(1000F * Time.deltaTime, 0));
             _spriteRenderer.flipX = false;
+        }
+
+        if (Input.GetKeyDown("w"))
+        {
+            _rb.AddForce(new Vector2(0f , 100000F * Time.deltaTime));       
         }
 
         if (Input.GetKeyDown("f"))
@@ -99,6 +106,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+       
     }
 
     void cogerObjeto(GameObject _Objeto_go)
@@ -116,4 +124,9 @@ public class Player : MonoBehaviour
         _Objeto_go.transform.rotation = Quaternion.identity;
         _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
     }
+
+  
+
+
+     
 }
