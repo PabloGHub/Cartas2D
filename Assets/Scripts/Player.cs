@@ -1,12 +1,17 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     // **** Variables **** //
     Rigidbody2D _rb;
+    Queue<KeyCode> inputBuffer;
     SpriteRenderer _spriteRenderer;
     public LayerMask layerMask;
     public float jumpForce;
+    float tiempoMaxSalto;
+    float tiempoEnElAire;
     [SerializeField]
     GameObject _Mano_go;
 
@@ -21,11 +26,14 @@ public class Player : MonoBehaviour
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        inputBuffer = new Queue<KeyCode>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetKey("a"))
         {
             _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
@@ -46,10 +54,38 @@ public class Player : MonoBehaviour
             _Mano_go.transform.localPosition = _manoPosicion_v3;
         }
 
-        if (Input.GetKeyDown("w"))
+  
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            _rb.AddForce(new Vector2(0f , (100000f * 2) * Time.deltaTime));       
+
+            inputBuffer.Enqueue(KeyCode.W);
+            StartCoroutine(quitarAccionConRetraso());
+
+        
         }
+
+
+            tiempoMaxSalto = 0;
+
+            if (inputBuffer.Count > 0)
+            {
+                if (inputBuffer.Peek() == KeyCode.W && tiempoMaxSalto < 0.2f)
+                {
+                    tiempoMaxSalto += Time.deltaTime;
+                    _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
+                    inputBuffer.Dequeue();
+                }
+            }
+
+
+        
+
+       
+
 
         if (Input.GetKeyDown("f"))
         {
@@ -135,8 +171,14 @@ public class Player : MonoBehaviour
         _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
     }
 
-  
+    IEnumerator quitarAccionConRetraso()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (inputBuffer.Count > 0)
+            inputBuffer.Dequeue();
+    }
 
 
-     
+
+
 }
