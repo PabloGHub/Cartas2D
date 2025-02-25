@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("w"))
         {
-            _rb.AddForce(new Vector2(0f , (100000f * 6) * Time.deltaTime));       
+            _rb.AddForce(new Vector2(0f , (100000f * 2) * Time.deltaTime));       
         }
 
         if (Input.GetKeyDown("f"))
