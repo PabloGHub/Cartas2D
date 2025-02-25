@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     public LayerMask layerMask;
     public float jumpForce;
+    [SerializeField]
+    GameObject _Mano_go;
 
     // VARs //
     bool _levantando = false;
@@ -28,12 +30,20 @@ public class Player : MonoBehaviour
         {
             _rb.AddForce(new Vector2(-1000F * Time.deltaTime, 0));
             _spriteRenderer.flipX = true;
+
+            Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+            _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
+            _Mano_go.transform.localPosition = _manoPosicion_v3;
         }
 
         if (Input.GetKey("d"))
         {
             _rb.AddForce(new Vector2(1000F * Time.deltaTime, 0));
             _spriteRenderer.flipX = false;
+
+            Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+            _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
+            _Mano_go.transform.localPosition = _manoPosicion_v3;
         }
 
         if (Input.GetKeyDown("w"))
