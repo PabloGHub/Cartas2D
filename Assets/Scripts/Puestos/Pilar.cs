@@ -1,6 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Pilar : MonoBehaviour
 {
@@ -29,9 +31,7 @@ public class Pilar : MonoBehaviour
 
             _objeto_go = _colision.gameObject;
 
-            new WaitForSeconds(0.5f);
-            Debug.Log("MATENMEEE");
-            _animator.Play("Aparecer");
+            StartCoroutine(animarRetardado("Aparecer"));
 
             Rigidbody2D _rbObjeto_rb = _objeto_go.GetComponent<Rigidbody2D>();
             if (_rbObjeto_rb != null)
@@ -47,9 +47,13 @@ public class Pilar : MonoBehaviour
 
             _objeto_go = null;
 
-            new WaitForSeconds(0.5f);
-            Debug.Log("ME QUIERO MORIR");
-            //_animator.Play("Quieto");
+            StartCoroutine(animarRetardado("Quieto"));
         }
+    }
+
+    IEnumerator animarRetardado(string _animacion_s)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _animator.Play(_animacion_s);
     }
 }
