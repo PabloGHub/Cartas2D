@@ -41,33 +41,37 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             inputBuffer.Enqueue(KeyCode.A);
-            StartCoroutine(quitarAccionConRetraso());
+            Invoke("quitarAccion", 0.5f);
+            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             inputBuffer.Enqueue(KeyCode.D);
-            StartCoroutine(quitarAccionConRetraso());
+            Invoke("quitarAccion", 0.5f);
+            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inputBuffer.Enqueue(KeyCode.Space);
-            StartCoroutine(quitarAccionConRetraso());
+            Invoke("quitarAccion", 0.5f);
+            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             inputBuffer.Enqueue(KeyCode.F);
-            StartCoroutine(quitarAccionConRetraso());
+            Invoke("quitarAccion", 0.5f);
+            //StartCoroutine(quitarAccionConRetraso());
         }
 
-        InputEventBuffer();
+        InputBuffer();
     }
 
 
 
-    void InputEventBuffer()
+    void InputBuffer()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
 
@@ -83,14 +87,14 @@ public class Player : MonoBehaviour
             }
 
             // Cojer Objeto
-            else if (inputBuffer.Peek() == KeyCode.F)
+            if (inputBuffer.Peek() == KeyCode.F)
             {
                 cojerObjeto();
                 inputBuffer.Dequeue();
             }
 
             // Ir izquierda
-            else if (inputBuffer.Peek() == KeyCode.A)
+            if (inputBuffer.Peek() == KeyCode.A)
             {
                 _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
                 _spriteRenderer.flipX = true;

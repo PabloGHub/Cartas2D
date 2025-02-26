@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,14 +24,22 @@ public class Combate : MonoBehaviour
     [SerializeField] GameObject _pilar3_go;
     [SerializeField] GameObject _pilar4_go;
 
+
     // --- Declaraciones del Combate --- //
+    [SerializeField] private TextMeshProUGUI _TextoDañoEnemigo_text;
+    [SerializeField] private TextMeshProUGUI _TextoSalud_text;
+    [SerializeField] private TextMeshProUGUI _TextoEnemigo_text;
+
     int _nivel_i = 1;
-    int _dañoEnemigo_i = 0;
+    float _dañoEnemigo_f = 1f;
     int _daño_i = 10; // hardcodeado/Picado, luego cuando funcionen los pilares se hace el sistema.
+    int _enemigosAbatidos_i = 0;
+
 
     // --- Declaraciones de Reloj --- //
     float _tiempoReloj_f = 0;
     int _segundos_i = 0;
+
 
     // ***********************( Metodos de UNITY )*********************** //
     void Start()
@@ -38,6 +47,8 @@ public class Combate : MonoBehaviour
         _salud_f = _maxSalud_f;
         _enemigo_f = _maxEnemigo_f;
         _tiempo_f = _maxTiempo_f;
+
+        actulizarCartel();
     }
 
     void Update()
@@ -62,16 +73,38 @@ public class Combate : MonoBehaviour
 
     void siguienteTurno()
     {
-        _salud_f -= _dañoEnemigo_i;
-        _barraSalud_image.fillAmount = _salud_f / _maxSalud_f;
-
+        _salud_f -= _dañoEnemigo_f;
         _enemigo_f -= _daño_i;
-        _barraEnemigo_image.fillAmount = _enemigo_f / _maxEnemigo_f;
+        actulizarCartel();
 
         if (_salud_f <= 0)
         {
-
+            // TODO: Implementar la muerte.
+            Debug.Log("LLevar a muerte");
         }
+
+        if (_enemigo_f <= 0)
+        {
+            _enemigosAbatidos_i++;
+            _enemigo_f = _maxEnemigo_f;
+
+            if (_enemigosAbatidos_i % 2 == 0)
+                _nivel_i++;
+
+            _dañoEnemigo_f += Random.Range(1, 3) * _nivel_i;
+        }
+
+        actulizarCartel();
+    }
+
+    void actulizarCartel()
+    {
+        _barraSalud_image.fillAmount = _salud_f / _maxSalud_f;
+        _barraEnemigo_image.fillAmount = _enemigo_f / _maxEnemigo_f;
+
+        _TextoDañoEnemigo_text.text = _dañoEnemigo_f.ToString();
+        _TextoSalud_text.text = _salud_f.ToString();
+        _TextoEnemigo_text.text = _enemigo_f.ToString();
     }
 
     // --- Sistema de Reloj --- //
@@ -108,5 +141,4 @@ public class Combate : MonoBehaviour
     {
 
     }
-}
 }
