@@ -512,6 +512,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1904751177}
     - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: _MascaraSuelo_lm.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
       propertyPath: _MascaraObjetos_lm.m_Bits
       value: 2048
       objectReference: {fileID: 0}
@@ -17534,7 +17538,7 @@ GameObject:
   - component: {fileID: 1534520852}
   - component: {fileID: 1534520851}
   - component: {fileID: 1534520850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Suelos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

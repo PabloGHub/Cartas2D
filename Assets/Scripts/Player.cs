@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     // Declaraciones de Referencias //
     public LayerMask _MascaraObjetos_lm;
+    public LayerMask _MascaraSuelo_lm;
     [SerializeField]
     GameObject _Mano_go;
 
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
 
         if (Input.GetKey("a"))
         {
@@ -61,26 +62,27 @@ public class Player : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            inputBuffer.Enqueue(KeyCode.W);
+            inputBuffer.Enqueue(KeyCode.Space);
             StartCoroutine(quitarAccionConRetraso());
         }
 
 
-        tiempoMaxSalto = 0;
-
-        if (inputBuffer.Count > 0)
+        if (raycastsuelo) 
         {
-            if (inputBuffer.Peek() == KeyCode.W && tiempoMaxSalto < 0.2f)
+
+            if (inputBuffer.Count > 0)
             {
-                tiempoMaxSalto += Time.deltaTime;
-                _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
-                inputBuffer.Dequeue();
+                if (inputBuffer.Peek() == KeyCode.Space)
+                {
+                    //tiempoMaxSalto += Time.deltaTime;
+                    _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
+                    inputBuffer.Dequeue();
+                }
             }
+
         }
-
-
         
 
        
