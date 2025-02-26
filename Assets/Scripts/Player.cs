@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
+        esquinas();
+
 
         if (Input.GetKey("a"))
         {
@@ -77,15 +79,15 @@ public class Player : MonoBehaviour
                 if (inputBuffer.Peek() == KeyCode.Space)
                 {
                     //tiempoMaxSalto += Time.deltaTime;
-                    _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
+                    _rb.AddForce(new Vector2(0f, (100500f * 2) * Time.deltaTime));
                     inputBuffer.Dequeue();
                 }
             }
 
         }
+
         
 
-       
 
 
         if (Input.GetKeyDown("f"))
@@ -180,6 +182,21 @@ public class Player : MonoBehaviour
     }
 
 
+    void esquinas()
+    {
+        RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0.5f), Vector2.up, 0.8f, _MascaraSuelo_lm);
+        RaycastHit2D raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.5f), Vector2.up, 0.8f, _MascaraSuelo_lm);
+        
 
+
+        if (raycastIzquierda && !raycastDerecha)
+        {
+            transform.position += new Vector3(0.25f, 0);
+        }
+        else if (raycastDerecha && !raycastIzquierda)
+        {
+            transform.position -= new Vector3(0.25f, 0);
+        }
+    }
 
 }
