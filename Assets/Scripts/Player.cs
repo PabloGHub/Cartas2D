@@ -98,6 +98,8 @@ public class Player : MonoBehaviour
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
                 _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
                 _Mano_go.transform.localPosition = _manoPosicion_v3;
+
+                inputBuffer.Dequeue();
             }
 
             // Ir derecha
@@ -109,6 +111,8 @@ public class Player : MonoBehaviour
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
                 _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
                 _Mano_go.transform.localPosition = _manoPosicion_v3;
+
+                inputBuffer.Dequeue();
             }
 
         }
@@ -174,6 +178,11 @@ public class Player : MonoBehaviour
         _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
     }
 
+    void quitarAccion()
+    {
+        if (inputBuffer.Count > 0)
+            inputBuffer.Dequeue();
+    }
 
     IEnumerator quitarAccionConRetraso()
     {
