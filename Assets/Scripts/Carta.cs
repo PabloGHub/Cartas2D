@@ -16,7 +16,7 @@ public class Carta : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        daño = Random.Range(2, 10) + (nivel * Random.Range(1, 3));
+        daño = Random.Range(5, 10) + (nivel * Random.Range(1, 3));
 
         if (dañoReferencia != null)
         {
