@@ -38,25 +38,16 @@ public class Player : MonoBehaviour
     {
         esquinas();
 
-
-        if (Input.GetKey("a"))
+        if (Input.GetKey(KeyCode.A))
         {
-            _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
-            _spriteRenderer.flipX = true;
-
-            Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-            _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
-            _Mano_go.transform.localPosition = _manoPosicion_v3;
+            inputBuffer.Enqueue(KeyCode.A);
+            StartCoroutine(quitarAccionConRetraso());
         }
 
-        if (Input.GetKey("d"))
+        if (Input.GetKey(KeyCode.D))
         {
-            _rb.AddForce(new Vector2(1000f * Time.deltaTime, 0));
-            _spriteRenderer.flipX = false;
-
-            Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-            _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
-            _Mano_go.transform.localPosition = _manoPosicion_v3;
+            inputBuffer.Enqueue(KeyCode.D);
+            StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -90,6 +81,7 @@ public class Player : MonoBehaviour
                 _rb.AddForce(new Vector2(0f, (100500f * 2) * Time.deltaTime));
                 inputBuffer.Dequeue();
             }
+
             // Cojer Objeto
             else if (inputBuffer.Peek() == KeyCode.F)
             {
@@ -97,10 +89,32 @@ public class Player : MonoBehaviour
                 inputBuffer.Dequeue();
             }
 
+            // Ir izquierda
+            else if (inputBuffer.Peek() == KeyCode.A)
+            {
+                _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
+                _spriteRenderer.flipX = true;
+
+                Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
+                _Mano_go.transform.localPosition = _manoPosicion_v3;
+            }
+
+            // Ir derecha
+            else if (inputBuffer.Peek() == KeyCode.D)
+            {
+                _rb.AddForce(new Vector2(1000f * Time.deltaTime, 0));
+                _spriteRenderer.flipX = false;
+
+                Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
+                _Mano_go.transform.localPosition = _manoPosicion_v3;
+            }
+
         }
 
-        
     }
+
 
     void cojerObjeto()
     {
@@ -130,7 +144,7 @@ public class Player : MonoBehaviour
             {
                 RaycastHit2D _hit = Physics2D.Raycast(transform.position + new Vector3(0, i), _paLante_v2, 2, _MascaraObjetos_lm);
 
-                Debug.Log("Rayo: " + (transform.position + new Vector3(0, i)) + " i:" + i );
+                //Debug.Log("Rayo: " + (transform.position + new Vector3(0, i)) + " i:" + i );
                 if (_hit.collider != null)
                 {
                     Debug.Log("El rayo ha colisionado con: " + _hit.collider.name);
@@ -142,6 +156,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 
     void levantarObjeto(GameObject _Objeto_go)
     {
@@ -166,7 +181,6 @@ public class Player : MonoBehaviour
         if (inputBuffer.Count > 0)
             inputBuffer.Dequeue();
     }
-
 
 
     void esquinas()
