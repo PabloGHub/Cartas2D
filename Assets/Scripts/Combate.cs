@@ -91,7 +91,7 @@ public class Combate : MonoBehaviour
             if (_enemigosAbatidos_i % 2 == 0)
                 _nivel_i++;
 
-            _dañoEnemigo_f += Random.Range(1, 3) * _nivel_i;
+            _dañoEnemigo_f += Random.Range(1, 4) * _nivel_i;
         }
 
         actulizarCartel();

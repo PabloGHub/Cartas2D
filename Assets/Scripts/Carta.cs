@@ -6,21 +6,39 @@ public class Carta : MonoBehaviour
 {
     // **** Variables **** //
     public int nivel = 1;
+    int _accion_i = 1; // 0 = cura, pa´lante = ataque.
 
     // Privados visibles.
     [SerializeField]
-    private float daño = 0f;
+    private float _cantidad_f = 0f;
     [SerializeField]
-    private TextMeshProUGUI dañoReferencia;
+    private TextMeshProUGUI _cantidad_text;
+    [SerializeField]
+    private Image _imagenAtaque_image;
+    [SerializeField]
+    private Image _imagenCurar_image;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        daño = Random.Range(5, 10) + (nivel * Random.Range(1, 3));
+        _accion_i = Random.Range(0, 4);
 
-        if (dañoReferencia != null)
+        if (_accion_i == 0)
         {
-            dañoReferencia.text = daño.ToString();
+            _imagenAtaque_image.enabled = false;
+            _cantidad_text.color = Color.green;
+        }
+        else
+        {
+            _imagenCurar_image.enabled = false;
+            _cantidad_text.color = Color.red;
+        }
+
+
+        _cantidad_f = Random.Range(5, 11) + (nivel * Random.Range(1, 4));
+        if (_cantidad_text != null)
+        {
+            _cantidad_text.text = _cantidad_f.ToString();
         }
     }
 
