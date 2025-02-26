@@ -182,7 +182,7 @@ MonoBehaviour:
   _MascaraSuelo_lm:
     serializedVersion: 2
     m_Bits: 4096
-  _Mano_go: {fileID: 0}
+  _Mano_go: {fileID: 1597304338415663356}
   jumpForce: 0
 --- !u!1 &1597304338415663356
 GameObject:
