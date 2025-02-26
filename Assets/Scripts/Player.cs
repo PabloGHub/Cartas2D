@@ -8,18 +8,20 @@ public class Player : MonoBehaviour
     Rigidbody2D _rb;
     Queue<KeyCode> inputBuffer;
     SpriteRenderer _spriteRenderer;
-    public LayerMask layerMask;
-    public float jumpForce;
-    float tiempoMaxSalto;
-    float tiempoEnElAire;
+    GameObject _objetoRayCast;
+
+    // Declaraciones de Referencias //
+    public LayerMask _MascaraObjetos_lm;
     [SerializeField]
     GameObject _Mano_go;
 
-    // VARs //
+    // variables comunes //
     bool _levantando = false;
-    bool canJump;
-    GameObject _objetoRayCast;
-    FixedJoint2D _eje;
+    float tiempoMaxSalto;
+    float tiempoEnElAire;
+    public float jumpForce; // No se donde se utiliza.
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,25 +63,22 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-
             inputBuffer.Enqueue(KeyCode.W);
             StartCoroutine(quitarAccionConRetraso());
-
-        
         }
 
 
-            tiempoMaxSalto = 0;
+        tiempoMaxSalto = 0;
 
-            if (inputBuffer.Count > 0)
+        if (inputBuffer.Count > 0)
+        {
+            if (inputBuffer.Peek() == KeyCode.W && tiempoMaxSalto < 0.2f)
             {
-                if (inputBuffer.Peek() == KeyCode.W && tiempoMaxSalto < 0.2f)
-                {
-                    tiempoMaxSalto += Time.deltaTime;
-                    _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
-                    inputBuffer.Dequeue();
-                }
+                tiempoMaxSalto += Time.deltaTime;
+                _rb.AddForce(new Vector2(0f, (100000f * 2) * Time.deltaTime));
+                inputBuffer.Dequeue();
             }
+        }
 
 
         
@@ -111,7 +110,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                RaycastHit2D _hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), _paLante_v2, 2, layerMask);
+                RaycastHit2D _hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), _paLante_v2, 2, _MascaraObjetos_lm);
                 if (_hit1.collider != null)
                 {
                     Debug.Log("El rayo1 ha colisionado con: " + _hit1.collider.name);
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), _paLante_v2, 2, layerMask);
+                RaycastHit2D _hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), _paLante_v2, 2, _MascaraObjetos_lm);
                 if (_hit2.collider != null)
                 {
                     Debug.Log("El rayo2 ha colisionado con: " + _hit2.collider.name);
@@ -131,7 +130,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit3 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), _paLante_v2, 2, layerMask);
+                RaycastHit2D _hit3 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), _paLante_v2, 2, _MascaraObjetos_lm);
                 if (_hit3.collider != null)
                 {
                     Debug.Log("El rayo3 ha colisionado con: " + _hit3.collider.name);
@@ -141,7 +140,7 @@ public class Player : MonoBehaviour
                     return;
                 }
 
-                RaycastHit2D _hit4 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1), _paLante_v2, 2, layerMask);
+                RaycastHit2D _hit4 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 1), _paLante_v2, 2, _MascaraObjetos_lm);
                 if (_hit4.collider != null)
                 {
                     Debug.Log("El rayo4 ha colisionado con: " + _hit4.collider.name);

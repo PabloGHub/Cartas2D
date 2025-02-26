@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.402234, y: 0.2824216, z: -10}
+  m_LocalPosition: {x: -0.09776603, y: 2.6824212, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -511,6 +511,10 @@ PrefabInstance:
       propertyPath: _Mano_go
       value: 
       objectReference: {fileID: 1904751177}
+    - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: _MascaraObjetos_lm.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 5165187771408895042, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -17355,7 +17359,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: 0, y: 0.15}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -17367,9 +17371,9 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 1, y: 1, z: 1}
   Lookahead:
-    Enabled: 0
-    Time: 0
-    Smoothing: 0
+    Enabled: 1
+    Time: 0.5
+    Smoothing: 6
     IgnoreY: 0
 --- !u!114 &1260260815
 MonoBehaviour:
@@ -17391,7 +17395,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1904751178}
+    TrackingTarget: {fileID: 1672730955}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -17423,7 +17427,7 @@ Transform:
   m_GameObject: {fileID: 1260260813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.402234, y: 0.2824216, z: -10}
+  m_LocalPosition: {x: -0.09776603, y: 2.6824212, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18746,14 +18750,14 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!4 &1672730955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 148372112325905958, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+  m_PrefabInstance: {fileID: 581309642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1904751177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1597304338415663356, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
-  m_PrefabInstance: {fileID: 581309642}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1904751178 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5165187771408895042, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
   m_PrefabInstance: {fileID: 581309642}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1996876552
@@ -18797,9 +18801,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1260260816}
   - {fileID: 271655170}
   - {fileID: 698612283}
   - {fileID: 581309642}
-  - {fileID: 1260260816}
   - {fileID: 1996876553}
   - {fileID: 990834905}
