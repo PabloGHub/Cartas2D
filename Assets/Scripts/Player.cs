@@ -114,9 +114,7 @@ public class Player : MonoBehaviour
 
                 inputBuffer.Dequeue();
             }
-
         }
-
     }
 
 
