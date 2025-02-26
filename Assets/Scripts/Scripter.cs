@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Scripter : MonoBehaviour
 {
     // ***********************( Declaraciones )*********************** //
+    // --- Declaraciones de barras y IU --- //
     [SerializeField] Image _barraSalud_image;
     [SerializeField] Image _barraEnemigo_image;
     [SerializeField] Image _barraTiempo_image;
@@ -11,10 +12,18 @@ public class Scripter : MonoBehaviour
     public float _maxSalud_f = 100;
     public float _maxEnemigo_f = 100;
     public float _maxTiempo_f = 20;
+
     float _salud_f;
     float _enemigo_f;
     float _tiempo_f;
 
+    // --- Delaciones de Pilares --- //
+    [SerializeField] GameObject _pilar1_go;
+    [SerializeField] GameObject _pilar2_go;
+    [SerializeField] GameObject _pilar3_go;
+    [SerializeField] GameObject _pilar4_go;
+
+    // --- Declaraciones de Reloj --- //
     float _tiempoReloj_f = 0;
     int _segundos_i = 0;
 
