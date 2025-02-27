@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     // **** Variables **** //
     Rigidbody2D _rb;
     Queue<KeyCode> inputBuffer;
+    Queue<KeyCode> inputBufferSalto;
     SpriteRenderer _spriteRenderer;
     GameObject _objetoRayCast;
 
@@ -33,13 +34,12 @@ public class Player : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         inputBuffer = new Queue<KeyCode>();
+        inputBufferSalto = new Queue<KeyCode>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         esquinas();
 
         if (Input.GetKey(KeyCode.A))
@@ -58,8 +58,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            inputBuffer.Enqueue(KeyCode.Space);
-            Invoke("quitarAccion", 0.5f);
+            inputBufferSalto.Enqueue(KeyCode.Space);
+            Invoke("quitarSalto", 0.5f);
             //StartCoroutine(quitarAccionConRetraso());
         }
 
@@ -71,36 +71,15 @@ public class Player : MonoBehaviour
         }
 
         InputBuffer();
+        InputBufferSalto();
     }
 
 
 
     void InputBuffer()
     {
-        RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
-        if (raycastsuelo == true)
-        {
-            Debug.Log("SaltoRayCast: " + raycastsuelo.collider.name);
-            Debug.Log("InicioRayCast: " + transform.position);
-            tiempoEnElAire = 0;
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            tiempoEnElAire += Time.deltaTime;
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-
-
         if (inputBuffer.Count > 0)
         {
-            // Salto
-            if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space && coyoteTimeCounter > 0f)
-            {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
-                    inputBuffer.Dequeue();
-                    coyoteTimeCounter = 0f;
-            }
             // Cojer Objeto
             if (inputBuffer.Peek() == KeyCode.F)
             {
@@ -134,6 +113,34 @@ public class Player : MonoBehaviour
                 inputBuffer.Dequeue();
             }
         }
+    }
+
+    void InputBufferSalto()
+    {
+        RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
+        if (raycastsuelo == true)
+        {
+            // Debug.Log("SaltoRayCast: " + raycastsuelo.collider.name);
+            // Debug.Log("InicioRayCast: " + transform.position);
+            tiempoEnElAire = 0;
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            tiempoEnElAire += Time.deltaTime;
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (inputBufferSalto.Count > 0)
+        {
+            // Salto
+            if (raycastsuelo && inputBufferSalto.Peek() == KeyCode.Space && coyoteTimeCounter > 0f)
+            {
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
+                inputBufferSalto.Dequeue();
+                coyoteTimeCounter = 0f;
+            }
+        }  
     }
 
 
@@ -199,6 +206,11 @@ public class Player : MonoBehaviour
     {
         if (inputBuffer.Count > 0)
             inputBuffer.Dequeue();
+    }
+    void quitarSalto()
+    {
+        if (inputBufferSalto.Count > 0)
+            inputBufferSalto.Dequeue();
     }
 
     IEnumerator quitarAccionConRetraso()
