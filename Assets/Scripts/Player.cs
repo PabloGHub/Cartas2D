@@ -78,7 +78,11 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
         if (raycastsuelo == true)
+        {
+            Debug.Log("SaltoRayCast: " + raycastsuelo.collider.name);
+            Debug.Log("InicioRayCast: " + transform.position);
             tiempoEnElAire = 0;
+        }
         else
             tiempoEnElAire += Time.deltaTime;
         
@@ -89,7 +93,7 @@ public class Player : MonoBehaviour
             // Salto
             if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space)
             {
-                if(raycastsuelo == true)
+                if (raycastsuelo == true)
                 {
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                     inputBuffer.Dequeue();
