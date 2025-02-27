@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
 
     // variables comunes //
     bool _levantando = false;
-    float tiempoMaxSalto;
     float tiempoEnElAire;
+    public float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
     public float _feurzaSalto_f = 10f;
     public float _fuerzaMovimiento_f = 10f;
 
@@ -77,32 +78,27 @@ public class Player : MonoBehaviour
     void InputBuffer()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
-        if (raycastsuelo == true)
+
+        if (raycastsuelo)
+        {
             tiempoEnElAire = 0;
+            coyoteTimeCounter = coyoteTime;
+        }
         else
+        {
             tiempoEnElAire += Time.deltaTime;
-        
+            coyoteTimeCounter -= Time.deltaTime;
+        }
 
 
         if (inputBuffer.Count > 0)
         {
             // Salto
-            if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space)
+            if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space && coyoteTimeCounter>0f)
             {
-                if(raycastsuelo == true)
-                {
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                     inputBuffer.Dequeue();
-                }
-                else
-                {
-                    if (tiempoEnElAire < 0.25f)
-                    {
-                        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
-                        inputBuffer.Dequeue();
-
-                    }
-                }
+                    coyoteTimeCounter = 0f;
             }
             // Cojer Objeto
             if (inputBuffer.Peek() == KeyCode.F)
