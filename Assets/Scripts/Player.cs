@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         esquinas();
 
         if (Input.GetKey(KeyCode.A))
@@ -74,6 +76,11 @@ public class Player : MonoBehaviour
     void InputBuffer()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
+        if (raycastsuelo == true)
+            tiempoEnElAire = 0;
+        else
+            tiempoEnElAire += Time.deltaTime;
+        
 
 
         if (inputBuffer.Count > 0)
@@ -81,11 +88,21 @@ public class Player : MonoBehaviour
             // Salto
             if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space)
             {
-                //tiempoMaxSalto += Time.deltaTime;
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
-                inputBuffer.Dequeue();
-            }
+                if(raycastsuelo == true)
+                {
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
+                    inputBuffer.Dequeue();
+                }
+                else
+                {
+                    if (tiempoEnElAire < 0.25f)
+                    {
+                        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
+                        inputBuffer.Dequeue();
 
+                    }
+                }
+            }
             // Cojer Objeto
             if (inputBuffer.Peek() == KeyCode.F)
             {
