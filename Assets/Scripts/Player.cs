@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     float tiempoMaxSalto;
     float tiempoEnElAire;
     public float _feurzaSalto_f = 10f;
+    public float _fuerzaMovimiento_f = 10f;
 
 
 
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour
             // Ir izquierda
             if (inputBuffer.Peek() == KeyCode.A)
             {
-                _rb.AddForce(new Vector2(-1000f * Time.deltaTime, 0));
+                _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
                 _spriteRenderer.flipX = true;
 
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
@@ -126,7 +127,7 @@ public class Player : MonoBehaviour
             // Ir derecha
             else if (inputBuffer.Peek() == KeyCode.D)
             {
-                _rb.AddForce(new Vector2(1000f * Time.deltaTime, 0));
+                _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
                 _spriteRenderer.flipX = false;
 
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;

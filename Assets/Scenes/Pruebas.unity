@@ -15526,6 +15526,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: _feurzaSalto_f
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: _fuerzaMovimiento_f
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971167286873638433, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971167286873638433, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: m_GravityScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971167286873638433, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: m_LinearDamping
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
