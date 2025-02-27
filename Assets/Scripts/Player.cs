@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     bool _levantando = false;
     float tiempoMaxSalto;
     float tiempoEnElAire;
-    public float jumpForce; // No se donde se utiliza.
+    public float _feurzaSalto_f = 10f;
 
 
 
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
             if (raycastsuelo && inputBuffer.Peek() == KeyCode.Space)
             {
                 //tiempoMaxSalto += Time.deltaTime;
-                _rb.AddForce(new Vector2(0f, (100500f * 2) * Time.deltaTime));
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBuffer.Dequeue();
             }
 

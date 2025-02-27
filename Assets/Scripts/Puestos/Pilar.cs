@@ -53,7 +53,7 @@ public class Pilar : MonoBehaviour
 
     IEnumerator animarRetardado(string _animacion_s)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         _animator.Play(_animacion_s);
     }
 }
