@@ -87,8 +87,8 @@ public class Player : MonoBehaviour
             // Ir izquierda
             if (inputBuffer.Peek() == KeyCode.A)
             {
-                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.25f, _MascaraSuelo_lm);
-                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.25f, _MascaraSuelo_lm);
+                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
+                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
 
                 if (!_hitArriba_rh && !_hitAbajo_rh)
                     _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
@@ -106,8 +106,8 @@ public class Player : MonoBehaviour
             // Ir derecha
             else if (inputBuffer.Peek() == KeyCode.D)
             {
-                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.25f, _MascaraSuelo_lm);
-                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.25f, _MascaraSuelo_lm);
+                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
+                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
 
                 if (!_hitArriba_rh && !_hitAbajo_rh)
                     _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
@@ -138,16 +138,16 @@ public class Player : MonoBehaviour
 
         if (inputBufferSalto.Count > 0)
         {
-            Debug.Log
-            (
-                " => Salto: " + _saltar_b +
-                " => RayCastSuelo: " + (raycastsuelo == true) +
-                " => TiempoEnElAire: " + tiempoEnElAire +
-                " => CoyoteTiempo: " + coyoteTime +
-                " => AireCoyote: " + (tiempoEnElAire < coyoteTime) +
-                " => AireCoyoteEpsilon: " + (tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)) +
-                " => if: " + ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
-            );
+            // Debug.Log
+            // (
+            //     " => Salto: " + _saltar_b +
+            //     " => RayCastSuelo: " + (raycastsuelo == true) +
+            //     " => TiempoEnElAire: " + tiempoEnElAire +
+            //     " => CoyoteTiempo: " + coyoteTime +
+            //     " => AireCoyote: " + (tiempoEnElAire < coyoteTime) +
+            //     " => AireCoyoteEpsilon: " + (tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)) +
+            //     " => if: " + ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
+            // );
 
             // Salto
             if ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
