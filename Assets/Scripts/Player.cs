@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class Player : MonoBehaviour
 {
-    // **** Variables **** //
+    // ***********************( Declaraciones )*********************** //
     Rigidbody2D _rb;
     Queue<KeyCode> inputBuffer;
     Queue<KeyCode> inputBufferSalto;
@@ -22,13 +22,13 @@ public class Player : MonoBehaviour
     bool _levantando = false;
     float tiempoEnElAire;
     public float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
     public float _feurzaSalto_f = 10f;
     public float _fuerzaMovimiento_f = 10f;
+    private bool _saltar_b = true;
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // ***********************( Metodos de UNITY )*********************** //
     void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
         inputBufferSalto = new Queue<KeyCode>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         esquinas();
@@ -75,7 +74,8 @@ public class Player : MonoBehaviour
     }
 
 
-
+    // ***********************( Metodos de NESTROS )*********************** // 
+    // --- InputBuffer --- //
     void InputBuffer()
     {
         if (inputBuffer.Count > 0)
@@ -114,7 +114,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     void InputBufferSalto()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
@@ -123,27 +122,50 @@ public class Player : MonoBehaviour
             // Debug.Log("SaltoRayCast: " + raycastsuelo.collider.name);
             // Debug.Log("InicioRayCast: " + transform.position);
             tiempoEnElAire = 0;
-            coyoteTimeCounter = coyoteTime;
         }
         else
         {
             tiempoEnElAire += Time.deltaTime;
-            coyoteTimeCounter -= Time.deltaTime;
         }
 
         if (inputBufferSalto.Count > 0)
         {
             // Salto
-            if (raycastsuelo && inputBufferSalto.Peek() == KeyCode.Space || tiempoEnElAire < coyoteTime)
+            if ((_saltar_b == true) && raycastsuelo && (inputBufferSalto.Peek() == KeyCode.Space || tiempoEnElAire < coyoteTime))
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBufferSalto.Dequeue();
-                coyoteTimeCounter = 0f;
+                _saltar_b = false;
+                Invoke("saltarTrue", coyoteTime);
             }
         }  
     }
 
+    void saltarTrue()
+    {
+        _saltar_b = true;
+    }
 
+    void quitarAccion()
+    {
+        if (inputBuffer.Count > 0)
+            inputBuffer.Dequeue();
+    }
+    void quitarSalto()
+    {
+        if (inputBufferSalto.Count > 0)
+            inputBufferSalto.Dequeue();
+    }
+
+    IEnumerator quitarAccionConRetraso()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (inputBuffer.Count > 0)
+            inputBuffer.Dequeue();
+    }
+
+
+    // --- Cojer/Levantar Objeto --- //
     void cojerObjeto()
     {
         Vector2 _paLante_v2 = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
@@ -184,8 +206,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-
     void levantarObjeto(GameObject _Objeto_go)
     {
         _levantando = true;
@@ -202,25 +222,8 @@ public class Player : MonoBehaviour
         _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
     }
 
-    void quitarAccion()
-    {
-        if (inputBuffer.Count > 0)
-            inputBuffer.Dequeue();
-    }
-    void quitarSalto()
-    {
-        if (inputBufferSalto.Count > 0)
-            inputBufferSalto.Dequeue();
-    }
 
-    IEnumerator quitarAccionConRetraso()
-    {
-        yield return new WaitForSeconds(0.5f);
-        if (inputBuffer.Count > 0)
-            inputBuffer.Dequeue();
-    }
-
-
+    // --- Correcion de esquinas --- //
     void esquinas()
     {
         RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0.5f), Vector2.up, 0.8f, _MascaraSuelo_lm);
