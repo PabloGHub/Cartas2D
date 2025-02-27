@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         if (inputBufferSalto.Count > 0)
         {
             // Salto
-            if (raycastsuelo && inputBufferSalto.Peek() == KeyCode.Space && coyoteTimeCounter > 0f)
+            if (raycastsuelo && inputBufferSalto.Peek() == KeyCode.Space || tiempoEnElAire < coyoteTime)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBufferSalto.Dequeue();
