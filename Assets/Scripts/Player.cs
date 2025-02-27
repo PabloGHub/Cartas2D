@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     }
 
 
-    // ***********************( Metodos de NESTROS )*********************** // 
+    // ***********************( Metodos NESTROS )*********************** // 
     // --- InputBuffer --- //
     void InputBuffer()
     {
@@ -237,15 +237,15 @@ public class Player : MonoBehaviour
     // --- Correcion de esquinas --- //
     void esquinas()
     {
-        RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
-        RaycastHit2D raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
+        RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
+        RaycastHit2D raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
        
         if (raycastIzquierda && !raycastDerecha)
         {
             while (true)
             {
                 transform.position += new Vector3(0.25f, 0);
-                raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
+                raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
                 if (!raycastIzquierda)
                 {
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
@@ -258,7 +258,7 @@ public class Player : MonoBehaviour
             while (true)
             {
                 transform.position -= new Vector3(0.25f, 0);
-                raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
+                raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
                 if (!raycastDerecha)
                 {
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
