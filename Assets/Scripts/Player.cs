@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public float _feurzaSalto_f = 10f;
     public float _fuerzaMovimiento_f = 10f;
     private bool _saltar_b = true;
+    private const float _coyoteEpsilon_f = 0.01f;
 
 
 
@@ -126,38 +127,45 @@ public class Player : MonoBehaviour
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
 
         if (raycastsuelo == true)
+        {
             tiempoEnElAire = 0;
+        }
         else
+        {
             tiempoEnElAire += Time.deltaTime;
+        }
 
 
         if (inputBufferSalto.Count > 0)
         {
-            // Debug.Log
-            // (
-            //     " => Salto: " + _saltar_b +
-            //     " => RayCastSuelo: " + (raycastsuelo == true) +
-            //     " => TiempoEnElAire: " + tiempoEnElAire +
-            //     " => CoyoteTiempo: " + coyoteTime +
-            //     " => Aire < Coyote: " + (tiempoEnElAire < coyoteTime) +
-            //     " => if: " + (_saltar_b && (raycastsuelo == true || tiempoEnElAire < coyoteTime))
-            // );
+            Debug.Log
+            (
+                " => Salto: " + _saltar_b +
+                " => RayCastSuelo: " + (raycastsuelo == true) +
+                " => TiempoEnElAire: " + tiempoEnElAire +
+                " => CoyoteTiempo: " + coyoteTime +
+                " => AireCoyote: " + (tiempoEnElAire < coyoteTime) +
+                " => AireCoyoteEpsilon: " + (tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)) +
+                " => if: " + ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
+            );
 
             // Salto
-            if (_saltar_b && (raycastsuelo == true || tiempoEnElAire < coyoteTime))
+            if ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
             {
                 Debug.Log("--SALTAR--");
 
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBufferSalto.Dequeue();
                 _saltar_b = false;
-                Invoke("saltarTrue", coyoteTime);
+                StartCoroutine(saltarTrue());
             }
         }  
     }
 
-    void saltarTrue()
+    IEnumerator saltarTrue()
     {
+        yield return new WaitForSeconds(coyoteTime + _coyoteEpsilon_f);
+        Debug.Log("-- VUELVES a SALTAR --");
         _saltar_b = true;
     }
 
