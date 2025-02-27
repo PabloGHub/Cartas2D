@@ -45,28 +45,24 @@ public class Player : MonoBehaviour
         {
             inputBuffer.Enqueue(KeyCode.A);
             Invoke("quitarAccion", 0.5f);
-            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             inputBuffer.Enqueue(KeyCode.D);
             Invoke("quitarAccion", 0.5f);
-            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inputBufferSalto.Enqueue(KeyCode.Space);
             Invoke("quitarSalto", 0.5f);
-            //StartCoroutine(quitarAccionConRetraso());
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             inputBuffer.Enqueue(KeyCode.F);
             Invoke("quitarAccion", 0.5f);
-            //StartCoroutine(quitarAccionConRetraso());
         }
 
         InputBuffer();
@@ -128,22 +124,30 @@ public class Player : MonoBehaviour
     void InputBufferSalto()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
+
         if (raycastsuelo == true)
-        {
-            // Debug.Log("SaltoRayCast: " + raycastsuelo.collider.name);
-            // Debug.Log("InicioRayCast: " + transform.position);
             tiempoEnElAire = 0;
-        }
         else
-        {
             tiempoEnElAire += Time.deltaTime;
-        }
+
 
         if (inputBufferSalto.Count > 0)
         {
+            // Debug.Log
+            // (
+            //     " => Salto: " + _saltar_b +
+            //     " => RayCastSuelo: " + (raycastsuelo == true) +
+            //     " => TiempoEnElAire: " + tiempoEnElAire +
+            //     " => CoyoteTiempo: " + coyoteTime +
+            //     " => Aire < Coyote: " + (tiempoEnElAire < coyoteTime) +
+            //     " => if: " + (_saltar_b && (raycastsuelo == true || tiempoEnElAire < coyoteTime))
+            // );
+
             // Salto
-            if ((_saltar_b == true) && raycastsuelo && (inputBufferSalto.Peek() == KeyCode.Space || tiempoEnElAire < coyoteTime))
+            if (_saltar_b && (raycastsuelo == true || tiempoEnElAire < coyoteTime))
             {
+                Debug.Log("--SALTAR--");
+
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBufferSalto.Dequeue();
                 _saltar_b = false;
