@@ -90,7 +90,13 @@ public class Player : MonoBehaviour
             // Ir izquierda
             if (inputBuffer.Peek() == KeyCode.A)
             {
-                _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
+                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.25f, _MascaraSuelo_lm);
+                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.25f, _MascaraSuelo_lm);
+
+                if (!_hitArriba_rh && !_hitAbajo_rh)
+                    _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
+                
+
                 _spriteRenderer.flipX = true;
 
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
@@ -103,7 +109,12 @@ public class Player : MonoBehaviour
             // Ir derecha
             else if (inputBuffer.Peek() == KeyCode.D)
             {
-                _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
+                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.25f, _MascaraSuelo_lm);
+                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.25f, _MascaraSuelo_lm);
+
+                if (!_hitArriba_rh && !_hitAbajo_rh)
+                    _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
+                
                 _spriteRenderer.flipX = false;
 
                 Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
@@ -224,7 +235,6 @@ public class Player : MonoBehaviour
 
 
     // --- Correcion de esquinas --- //
-    /*
     void esquinas()
     {
         RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
@@ -238,7 +248,7 @@ public class Player : MonoBehaviour
                 raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
                 if (!raycastIzquierda)
                 {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 4) * 3);
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
                     break; 
                 }
             }
@@ -251,14 +261,14 @@ public class Player : MonoBehaviour
                 raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.7f, _MascaraSuelo_lm);
                 if (!raycastDerecha)
                 {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 4) * 3);
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
                     break;
                 }
             }
         }
     }
-    */
-    void esquinas()
+    /*
+     void esquinas()
     {
 
         Vector3 offsetIzq = new Vector3(-0.5f, 0.5f);
@@ -277,5 +287,6 @@ public class Player : MonoBehaviour
             transform.position += new Vector3(-0.1f, alturaSubida, 0);
         }
     }
+    */
 
 }
