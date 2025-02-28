@@ -7,7 +7,7 @@ using System.Collections;
 public abstract class Absorber : MonoBehaviour
 {
     // ****************** DECALRACIONES ****************** //
-    protected GameObject _objeto_go;
+    public GameObject _objeto_go;
     protected Animator _animator;
 
 

@@ -32,7 +32,7 @@ public class Combate : MonoBehaviour
 
     int _nivel_i = 1;
     float _dañoEnemigo_f = 1f;
-    int _daño_i = 10; // hardcodeado/Picado, luego cuando funcionen los pilares se hace el sistema.
+    int _daño_i = 0; 
     int _enemigosAbatidos_i = 0;
 
 
@@ -73,8 +73,65 @@ public class Combate : MonoBehaviour
 
     void siguienteTurno()
     {
+        float _dannoAcer_f = 0;
+        float _saludAcer_f = 0;
+
+        int _pilaresActivos_i = 0;
+        if (_pilar1_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar2_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar3_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar4_go.activeInHierarchy) _pilaresActivos_i++;
+
+        switch (_pilaresActivos_i)
+        {
+            case 4:
+                if (_pilar4_go.GetComponent<Pilar>()._cartaEncima_b)
+                {
+                    var _carta = _pilar4_go.GetComponentInChildren<Carta>();
+                    if (_carta._accion_i == 0)
+                        _saludAcer_f += _carta._cantidad_f;
+                    else
+                        _dannoAcer_f += _carta._cantidad_f;
+                }
+            goto case 3;
+            case 3:
+                if (_pilar3_go.GetComponent<Pilar>()._cartaEncima_b)
+                {
+                    var _carta = _pilar3_go.GetComponentInChildren<Carta>();
+                    if (_carta._accion_i == 0)
+                        _saludAcer_f += _carta._cantidad_f;
+                    else
+                        _dannoAcer_f += _carta._cantidad_f;
+                }
+            goto case 2;
+            case 2:
+                if (_pilar2_go.GetComponent<Pilar>()._cartaEncima_b)
+                {
+                    var _carta = _pilar2_go.GetComponentInChildren<Carta>();
+                    if (_carta._accion_i == 0)
+                        _saludAcer_f += _carta._cantidad_f;
+                    else
+                        _dannoAcer_f += _carta._cantidad_f;
+                }
+            goto case 1;
+            case 1:
+                if (_pilar1_go.GetComponent<Pilar>()._cartaEncima_b)
+                {
+                    var _carta = _pilar1_go.GetComponentInChildren<Carta>();
+                    if (_carta._accion_i == 0)
+                        _saludAcer_f += _carta._cantidad_f;
+                    else
+                        _dannoAcer_f += _carta._cantidad_f;
+                }
+            break;
+        }
+
+        _daño_i = (int)_dannoAcer_f;
+        _salud_f += _saludAcer_f;
+
         _salud_f -= _dañoEnemigo_f;
         _enemigo_f -= _daño_i;
+        
         actulizarCartel();
 
         if (_salud_f <= 0)

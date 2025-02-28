@@ -29,6 +29,8 @@ public class Pilar : Absorber
             GetComponent<BoxCollider2D>().enabled = true;
             _cartaEncima_b = true;
 
+            // Si dejo de simular las fisicas no puedo volverlo a coger la carta.
+            // Al simularlas la carta se puede mover al poner otra alado.
             moverEncima();
         }
     }

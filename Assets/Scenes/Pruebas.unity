@@ -1159,6 +1159,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PilaresDeCartas
       objectReference: {fileID: 0}
+    - target: {fileID: 7134873361405125970, guid: 4ef104d96aaef7c419dab142d4243b58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769260648433957102, guid: 4ef104d96aaef7c419dab142d4243b58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929849521717469301, guid: 4ef104d96aaef7c419dab142d4243b58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

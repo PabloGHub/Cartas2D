@@ -6,11 +6,10 @@ public class Carta : MonoBehaviour
 {
     // **** Variables **** //
     public int nivel = 1;
-    int _accion_i = 1; // 0 = cura, pa´lante = ataque.
+    public int _accion_i = 1; // 0 = cura, pa´lante = ataque.
 
     // Privados visibles.
-    [SerializeField]
-    private float _cantidad_f = 0f;
+    public float _cantidad_f = 0f;
     [SerializeField]
     private TextMeshProUGUI _cantidad_text;
     [SerializeField]
