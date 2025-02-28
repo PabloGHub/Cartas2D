@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     public float _feurzaSalto_f = 10f;
     public float _fuerzaMovimiento_f = 10f;
     private bool _saltar_b = true;
-    private const float _coyoteEpsilon_f = 0.01f;
+    private const float _coyoteEpsilon_f = 0.01f; // MQM
 
 
 
@@ -77,48 +78,56 @@ public class Player : MonoBehaviour
     {
         if (inputBuffer.Count > 0)
         {
-            // Cojer Objeto
-            if (inputBuffer.Peek() == KeyCode.F)
+            try 
             {
-                cojerObjeto();
-                inputBuffer.Dequeue();
+                // Cojer Objeto
+                if (inputBuffer.Peek() == KeyCode.F)
+                {
+                    cojerObjeto();
+                    inputBuffer.Dequeue();
+                }
+
+                // Ir izquierda
+                if (inputBuffer.Peek() == KeyCode.A)
+                {
+                    RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
+                    RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
+
+                    if (!_hitArriba_rh && !_hitAbajo_rh)
+                        _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
+
+
+                    _spriteRenderer.flipX = true;
+
+                    Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                    _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
+                    _Mano_go.transform.localPosition = _manoPosicion_v3;
+
+                    inputBuffer.Dequeue();
+                }
+
+                // Ir derecha
+                else if (inputBuffer.Peek() == KeyCode.D)
+                {
+                    RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
+                    RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
+
+                    if (!_hitArriba_rh && !_hitAbajo_rh)
+                        _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
+
+                    _spriteRenderer.flipX = false;
+
+                    Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                    _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
+                    _Mano_go.transform.localPosition = _manoPosicion_v3;
+
+                    inputBuffer.Dequeue();
+                }
             }
-
-            // Ir izquierda
-            if (inputBuffer.Peek() == KeyCode.A)
+            catch (InvalidOperationException _ipe_e)
             {
-                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
-                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
-
-                if (!_hitArriba_rh && !_hitAbajo_rh)
-                    _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
-                
-
-                _spriteRenderer.flipX = true;
-
-                Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-                _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
-                _Mano_go.transform.localPosition = _manoPosicion_v3;
-
-                inputBuffer.Dequeue();
-            }
-
-            // Ir derecha
-            else if (inputBuffer.Peek() == KeyCode.D)
-            {
-                RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
-                RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
-
-                if (!_hitArriba_rh && !_hitAbajo_rh)
-                    _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
-                
-                _spriteRenderer.flipX = false;
-
-                Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-                _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
-                _Mano_go.transform.localPosition = _manoPosicion_v3;
-
-                inputBuffer.Dequeue();
+                // No sabesmos porque no para de sucecer.
+                // Debug.LogError("Error: " + _ipe_e.Message);
             }
         }
     }

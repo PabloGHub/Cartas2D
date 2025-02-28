@@ -4,7 +4,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Collections.Generic;
 using System.Collections;
 
-public class Absorber : MonoBehaviour
+public abstract class Absorber : MonoBehaviour
 {
     // ****************** DECALRACIONES ****************** //
     protected GameObject _objeto_go;
@@ -17,15 +17,17 @@ public class Absorber : MonoBehaviour
         if (_colision.gameObject.CompareTag("Objeto"))
         {
             _animator = _colision.gameObject.GetComponentInChildren<Animator>();
-            _animator.Play("Desvanecer");
+            //_animator.Play("Desvanecer");
             _objeto_go = _colision.gameObject;
 
-            //trasAbsorber();
+            trasAbsorber();
         }
     }
 
 
     // ****************** Metodos NUESTROS ****************** //
+    protected abstract void trasAbsorber();
+
     protected IEnumerator animarRetardado(string _animacion_s, float _tiempo_f)
     {
         yield return new WaitForSeconds(_tiempo_f);
@@ -41,5 +43,6 @@ public class Absorber : MonoBehaviour
             yield return null;
         }
         _animator.Play(_AnimacionSiguiente_s);
+        Debug.Log(_AnimacionSiguiente_s);
     }
 }
