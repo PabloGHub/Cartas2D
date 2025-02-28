@@ -7,6 +7,9 @@ using System.Collections;
 public class Pilar : Absorber
 {
     // ****************** Metodos Unity ****************** //
+    public LayerMask _MascaraObjetos_lm;
+
+    // ****************** Metodos Unity ****************** //
     void Start()
     {
         
@@ -14,9 +17,9 @@ public class Pilar : Absorber
 
     void Update()
     {
-        RaycastHit2D _HitCarta_h = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("Objeto"));
+        RaycastHit2D _HitCarta_h = Physics2D.Raycast(transform.position - new Vector3(0f, -0.5f), Vector2.up, 0.5f, _MascaraObjetos_lm);
         
-        if (_HitCarta_h.collider != null)
+        if (_HitCarta_h)
         {
             Debug.Log(_HitCarta_h.collider.name);
             GetComponent<BoxCollider2D>().enabled = false;
