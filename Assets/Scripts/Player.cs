@@ -193,9 +193,24 @@ public class Player : MonoBehaviour
     {
         Vector2 _paLante_v2 = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
 
+
+      
+
+
+
         // soltar delante
         if (_levantando == true)
         {
+
+            RaycastHit2D pared = Physics2D.Raycast(transform.position, _paLante_v2, 1.5f, _MascaraSuelo_lm);
+
+            if (pared.collider != null)
+            {
+                transform.position -= new Vector3(_paLante_v2.x,_paLante_v2.y,0f);
+                
+            }
+
+
             _levantando = false;
             Rigidbody2D _rbObjeto_rb = _objetoRayCast.GetComponent<Rigidbody2D>();
             _rbObjeto_rb.simulated = true;
