@@ -1155,6 +1155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2910922865377059022, guid: 4ef104d96aaef7c419dab142d4243b58, type: 3}
+      propertyPath: _cartaEncima_b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6607471891739416376, guid: 4ef104d96aaef7c419dab142d4243b58, type: 3}
       propertyPath: m_Name
       value: PilaresDeCartas
