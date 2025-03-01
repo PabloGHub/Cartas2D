@@ -103,10 +103,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 3
   m_LinearDamping: 10
   m_AngularDamping: 0.1
-  m_GravityScale: 10
+  m_GravityScale: 50
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -184,8 +184,8 @@ MonoBehaviour:
     m_Bits: 4096
   _Mano_go: {fileID: 1597304338415663356}
   coyoteTime: 0.2
-  _feurzaSalto_f: 80
-  _fuerzaMovimiento_f: 4000
+  _feurzaSalto_f: 135
+  _fuerzaMovimiento_f: 65000
 --- !u!1 &1597304338415663356
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,7 +127,8 @@ public class Player : MonoBehaviour
             catch (InvalidOperationException _ipe_e)
             {
                 // No sabesmos porque no para de sucecer.
-                Debug.LogError("Error: " + _ipe_e.Message);
+                // Debug.LogError("Error: " + _ipe_e.Message);
+                var matenme = _ipe_e.Message;
             }
         }
     }
@@ -172,7 +173,7 @@ public class Player : MonoBehaviour
     IEnumerator saltarTrue()
     {
         yield return new WaitForSeconds(coyoteTime + _coyoteEpsilon_f);
-        Debug.Log("-- VUELVES a SALTAR --");
+        //Debug.Log("-- VUELVES a SALTAR --");
         _saltar_b = true;
     }
 

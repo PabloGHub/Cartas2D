@@ -143,9 +143,12 @@ public class Combate : MonoBehaviour
             _enemigo_f = _maxEnemigo_f;
 
             if (_enemigosAbatidos_i % 2 == 0)
+            {
                 _nivel_i++;
+                _maxSalud_f += 10;
+            }
 
-            _dañoEnemigo_f += Random.Range(1, 4) * _nivel_i;
+            _dañoEnemigo_f += Random.Range(1, 5) * _nivel_i;
         }
 
         actulizarCartel();
@@ -164,6 +167,8 @@ public class Combate : MonoBehaviour
     // --- Sistema de Pilares --- //
     void comprobarPialres()
     {
+        _pilaresActivos_i = 0;
+
         if (_pilar1_go.activeInHierarchy) _pilaresActivos_i++;
         if (_pilar2_go.activeInHierarchy) _pilaresActivos_i++;
         if (_pilar3_go.activeInHierarchy) _pilaresActivos_i++;

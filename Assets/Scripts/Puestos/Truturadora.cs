@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Truturadora : Absorber
@@ -21,5 +22,6 @@ public class Truturadora : Absorber
     protected override void trasAbsorber()
     {
         _combate.siguientePialar();
+        Destroy(_objeto_go);
     }
 }
