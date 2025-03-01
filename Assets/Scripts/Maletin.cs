@@ -18,7 +18,7 @@ public class Maletin : MonoBehaviour
 
     void Update()
     {
-
+        _contador_si.text = _numMonedas_i.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D _colision)

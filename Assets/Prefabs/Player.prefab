@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _Mano_go: {fileID: 1597304338415663356}
-  _tienda_script: {fileID: 5432571036328855782, guid: bc25e9c1ed4444041bba91d1d086eb00, type: 3}
+  _tienda_script: {fileID: 0}
   coyoteTime: 0.2
   _feurzaSalto_f: 135
   _fuerzaMovimiento_f: 65000

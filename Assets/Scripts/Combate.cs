@@ -31,11 +31,16 @@ public class Combate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _TextoSalud_text;
     [SerializeField] private TextMeshProUGUI _TextoEnemigo_text;
 
-    int _nivel_i = 1;
+    public int _nivel_i = 1;
     float _dañoEnemigo_f = 1f;
     int _daño_i = 0; 
     int _enemigosAbatidos_i = 0;
 
+    // --- Declaraciones Tienda --- //
+    [SerializeField]
+    Tienda _tienda_script;
+    [SerializeField]
+    GameObject _PrefabMeneda_go;
 
     // --- Declaraciones de Reloj --- //
     float _tiempoReloj_f = 0;
@@ -125,6 +130,8 @@ public class Combate : MonoBehaviour
 
         _daño_i = (int)_dannoAcer_f;
         _salud_f += _saludAcer_f;
+        if (_salud_f > _maxSalud_f)
+            _salud_f = _maxSalud_f;
 
         _salud_f -= _dañoEnemigo_f;
         _enemigo_f -= _daño_i;
@@ -135,21 +142,26 @@ public class Combate : MonoBehaviour
         {
             // TODO: Implementar la muerte.
             Debug.Log("LLevar a muerte");
+            _salud_f = _maxSalud_f;
         }
 
         if (_enemigo_f <= 0)
         {
             _enemigosAbatidos_i++;
-            _enemigo_f = _maxEnemigo_f;
-
             if (_enemigosAbatidos_i % 2 == 0)
             {
                 _nivel_i++;
-                _maxSalud_f += 10;
+                _maxEnemigo_f += 10;
             }
+            _enemigo_f = _maxEnemigo_f;
+
+            intanciarMenedas();
 
             _dañoEnemigo_f += Random.Range(1, 5) * _nivel_i;
         }
+
+        _tienda_script.siguienteRonda();
+        _tienda_script._nivel_i = _nivel_i;
 
         actulizarCartel();
     }
@@ -162,6 +174,13 @@ public class Combate : MonoBehaviour
         _TextoDañoEnemigo_text.text = _dañoEnemigo_f.ToString();
         _TextoSalud_text.text = _salud_f.ToString();
         _TextoEnemigo_text.text = _enemigo_f.ToString();
+    }
+
+    void intanciarMenedas()
+    {
+        int _cantidad_i = (int)((_dañoEnemigo_f / 2) + 0.25f);
+        for (int i = 0; i <= _cantidad_i; i++)
+            Instantiate(_PrefabMeneda_go, transform);
     }
 
     // --- Sistema de Pilares --- //

@@ -9,7 +9,8 @@ public class Tienda : Absorber
     public int _cantidadMonedas_i = 0;
     private int _cantidadHijos_i = 0;
     float _alturaObjetoTienda_f;
-    private GameObject _supuestoMaletin_go;
+    public GameObject _supuestoMaletin_go;
+    public int _nivel_i = 1;
 
     // --- puestos de cartas --- //
     [SerializeField] GameObject _puesto1_go;
@@ -166,14 +167,21 @@ public class Tienda : Absorber
             Destroy(_carta3.gameObject);
 
         generarCartas();
-
     }
 
     void generarCartas()
     {
         _carta1_go = Instantiate(_PrefabCarta, _puesto1_go.transform);
+        _carta1_go.GetComponent<Carta>().nivel = _nivel_i;
+        _carta1_go.GetComponent<Carta>()._vendiendose_b = true;
+
         _carta2_go = Instantiate(_PrefabCarta, _puesto2_go.transform);
+        _carta2_go.GetComponent<Carta>().nivel = _nivel_i;
+        _carta2_go.GetComponent<Carta>()._vendiendose_b = true;
+
         _carta3_go = Instantiate(_PrefabCarta, _puesto3_go.transform);
+        _carta3_go.GetComponent<Carta>().nivel = _nivel_i;
+        _carta3_go.GetComponent<Carta>()._vendiendose_b = true;
 
         moverEnicimaCartas();
     }
