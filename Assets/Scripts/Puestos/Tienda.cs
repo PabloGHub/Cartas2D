@@ -101,6 +101,16 @@ public class Tienda : Absorber
         }
     }
 
+    public void venderCarta(GameObject _cartaAVender_go)
+    {
+        if (_cartaAVender_go != null)
+        {
+            _objeto_go.GetComponent<Maletin>()._numMonedas_i -= (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
+            _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
+            Destroy(_cartaAVender_go);
+        }
+    }
+
     // --- Rondas de Cartas --- //
     public void siguienteRonda()
     {

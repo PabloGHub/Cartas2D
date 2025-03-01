@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public LayerMask _MascaraSuelo_lm;
     [SerializeField]
     GameObject _Mano_go;
+    [SerializeField]
+    Tienda _tienda_script;
 
     // variables comunes //
     bool _levantando = false;
@@ -236,9 +238,17 @@ public class Player : MonoBehaviour
                 //Debug.Log("Rayo: " + (transform.position + new Vector3(0, i)) + " i:" + i );
                 if (_hit.collider != null)
                 {
+                    GameObject _cartaALevantar_go = _hit.collider.gameObject;
                     Debug.Log("El rayo ha colisionado con: " + _hit.collider.name);
-                    levantarObjeto(_hit.collider.gameObject);
-                    _objetoRayCast = _hit.collider.gameObject;
+
+                    if (_cartaALevantar_go.GetComponent<Carta>()._vendiendose_b)
+                    {
+                        _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
+                        _tienda_script.venderCarta(_cartaALevantar_go);
+                    }
+
+                    levantarObjeto(_cartaALevantar_go);
+                    _objetoRayCast = _cartaALevantar_go;
 
                     return;
                 }
