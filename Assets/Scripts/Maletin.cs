@@ -6,8 +6,6 @@ public class Maletin : MonoBehaviour
     // ****************** Declaraciones ****************** //
     public int _numMonedas_i = 0;
     [SerializeField]
-    GameObject _prefab_go;
-    [SerializeField]
     TextMeshProUGUI _contador_si;
 
     // ****************** Metodos UNITY ****************** //
@@ -32,11 +30,5 @@ public class Maletin : MonoBehaviour
                 Destroy(_colision.gameObject);
             }
         }
-    }
-
-    // ****************** Metodos Nuestros ****************** //
-    private bool esInstanciaPrefab(GameObject _obj_go)
-    {
-        return _obj_go != null && _prefab_go != null && _obj_go.name.Contains(_prefab_go.name);
     }
 }

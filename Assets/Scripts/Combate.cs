@@ -10,8 +10,8 @@ public class Combate : MonoBehaviour
     [SerializeField] Image _barraEnemigo_image;
     [SerializeField] Image _barraTiempo_image;
 
-    public float _maxSalud_f = 100;
-    public float _maxEnemigo_f = 100;
+    public float _maxSalud_f = 60;
+    public float _maxEnemigo_f = 25;
     public float _maxTiempo_f = 21;
 
     float _salud_f;
@@ -151,13 +151,14 @@ public class Combate : MonoBehaviour
             if (_enemigosAbatidos_i % 2 == 0)
             {
                 _nivel_i++;
-                _maxEnemigo_f += 10;
+                _maxEnemigo_f += 25;
+                _maxSalud_f += 20;
             }
             _enemigo_f = _maxEnemigo_f;
 
             intanciarMenedas();
 
-            _dañoEnemigo_f += Random.Range(1, 5) * _nivel_i;
+            _dañoEnemigo_f += _nivel_i;
         }
 
         _tienda_script.siguienteRonda();
@@ -178,9 +179,18 @@ public class Combate : MonoBehaviour
 
     void intanciarMenedas()
     {
-        int _cantidad_i = (int)((_dañoEnemigo_f / 2) + 0.25f);
+        int _cantidad_i = (int)((_dañoEnemigo_f / 2) + 0.25f) + 2;
         for (int i = 0; i <= _cantidad_i; i++)
-            Instantiate(_PrefabMeneda_go, transform);
+        {
+            Vector3 _posicion_v3;
+            if (Random.Range(0, 2) == 0)
+                _posicion_v3 = new Vector3(Random.Range(-15, -4), 30f);
+            else
+                _posicion_v3 = new Vector3(Random.Range(8, 16), 30f);
+
+            Instantiate(_PrefabMeneda_go, _posicion_v3, Quaternion.identity);
+        }
+            
     }
 
     // --- Sistema de Pilares --- //
