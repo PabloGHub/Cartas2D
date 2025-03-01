@@ -101,14 +101,38 @@ public class Tienda : Absorber
         }
     }
 
-    public void venderCarta(GameObject _cartaAVender_go)
+    public bool venderCarta(GameObject _cartaAVender_go)
     {
+        int _precio_i = 0;
+        int _monedasIniciales = _objeto_go.GetComponent<Maletin>()._numMonedas_i;
+
         if (_cartaAVender_go != null)
         {
-            _objeto_go.GetComponent<Maletin>()._numMonedas_i -= (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
+
+            if (_cartaAVender_go.GetComponent<Carta>()._accion_i == 0)
+                _precio_i = (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
+
+            else
+                _precio_i = (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
+
+
+            _objeto_go.GetComponent<Maletin>()._numMonedas_i -= _objeto_go.GetComponent<Maletin>()._numMonedas_i >= _precio_i ? _precio_i : 0;
+
+
+            if (_cartaAVender_go == _carta1_go)
+                _carta1_go = null;
+
+            else if (_cartaAVender_go == _carta2_go)
+                _carta2_go = null;
+
+            else if (_cartaAVender_go == _carta3_go)
+                _carta3_go = null;
+
+
             _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
-            Destroy(_cartaAVender_go);
         }
+
+        return _monedasIniciales != _objeto_go.GetComponent<Maletin>()._numMonedas_i;
     }
 
     // --- Rondas de Cartas --- //

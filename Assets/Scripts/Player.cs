@@ -241,7 +241,7 @@ public class Player : MonoBehaviour
                     GameObject _cartaALevantar_go = _hit.collider.gameObject;
                     Debug.Log("El rayo ha colisionado con: " + _hit.collider.name);
 
-                    if (_cartaALevantar_go.GetComponent<Carta>()._vendiendose_b)
+                    if (_cartaALevantar_go.GetComponent<Carta>() != null && _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b)
                     {
                         _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
                         _tienda_script.venderCarta(_cartaALevantar_go);
