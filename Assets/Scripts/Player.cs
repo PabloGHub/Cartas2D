@@ -243,9 +243,10 @@ public class Player : MonoBehaviour
 
                     if (_cartaALevantar_go.GetComponent<Carta>() != null && _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b)
                     {
-                        _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
                         if (_tienda_script.venderCarta(_cartaALevantar_go) == false)
                             return;
+
+                        _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
                     }
 
                     levantarObjeto(_cartaALevantar_go);

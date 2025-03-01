@@ -23,7 +23,9 @@ public class Pilar : Absorber
         {
             GetComponent<CircleCollider2D>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = false;
+
             _cartaEncima_b = false;
+            _objeto_go = null;
         }
         else
         {
