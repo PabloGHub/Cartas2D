@@ -21,7 +21,10 @@ public class Truturadora : Absorber
     // ****************** Metodos NUESTROS ****************** //
     protected override void trasAbsorber()
     {
-        _combate.siguientePialar();
-        Destroy(_objeto_go);
+        if (_objetoAbsorbido_go.GetComponent<Carta>() != null)
+        {
+            _combate.siguientePialar();
+            Destroy(_objetoAbsorbido_go);
+        }
     }
 }

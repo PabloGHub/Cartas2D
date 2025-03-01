@@ -238,8 +238,8 @@ public class Player : MonoBehaviour
                 //Debug.Log("Rayo: " + (transform.position + new Vector3(0, i)) + " i:" + i );
                 if (_hit.collider != null)
                 {
-                    GameObject _cartaALevantar_go = _hit.collider.gameObject;
-                    Debug.Log("El rayo ha colisionado con: " + _hit.collider.name);
+                    GameObject _cartaALevantar_go = _hit.collider.transform.parent.gameObject;
+                    Debug.Log("El rayo ha colisionado con: " + _cartaALevantar_go.name);
 
                     if ((_cartaALevantar_go.GetComponent<Carta>() != null) && (_cartaALevantar_go.GetComponent<Carta>()._vendiendose_b == true))
                     {
@@ -259,18 +259,26 @@ public class Player : MonoBehaviour
     }
     void levantarObjeto(GameObject _Objeto_go)
     {
-        _levantando = true;
-        Rigidbody2D _rbObjeto_rb = _Objeto_go.GetComponent<Rigidbody2D>();
-        if (_rbObjeto_rb != null)
+        try
         {
-            _rbObjeto_rb.Sleep();
-            _rbObjeto_rb.simulated = false;
-        }
-        float alturaObjeto = _Objeto_go.GetComponent<Renderer>().bounds.size.y;
+            Rigidbody2D _rbObjeto_rb = _Objeto_go.GetComponent<Rigidbody2D>();
+            if (_rbObjeto_rb != null)
+            {
+                _rbObjeto_rb.Sleep();
+                _rbObjeto_rb.simulated = false;
+            }
+            float alturaObjeto = _Objeto_go.GetComponent<Renderer>().bounds.size.y;
 
-        _Objeto_go.transform.SetParent(transform);
-        _Objeto_go.transform.rotation = Quaternion.identity;
-        _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
+            _Objeto_go.transform.SetParent(transform);
+            _Objeto_go.transform.rotation = Quaternion.identity;
+            _Objeto_go.transform.localPosition = new Vector3(0, (alturaObjeto / 2) + 1f, 0);
+
+            _levantando = true;
+        }
+        catch (Exception _e)
+        {
+            Debug.LogError("Error: " + _e.Message);
+        }
     }
 
 

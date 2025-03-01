@@ -9,7 +9,6 @@ public class Tienda : Absorber
     public int _cantidadMonedas_i = 0;
     private int _cantidadHijos_i = 0;
     float _alturaObjetoTienda_f;
-    public GameObject _supuestoMaletin_go;
     public int _nivel_i = 1;
 
     // --- puestos de cartas --- //
@@ -39,7 +38,7 @@ public class Tienda : Absorber
             GetComponent<CircleCollider2D>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = false;
 
-            _supuestoMaletin_go = null;
+            _objetoAbsorbido_go = null;
             _cantidadMonedas_i = 0;
             _contadorMonedas_tp.text = "0";
         }
@@ -48,43 +47,29 @@ public class Tienda : Absorber
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = true;
 
-            if (_supuestoMaletin_go != null)
+            if (_objetoAbsorbido_go.GetComponent<Maletin>() != null)
             {
-                moverEncimaMaletin();
-
-                if (_supuestoMaletin_go.GetComponent<Maletin>() != null)
-                {
-                    _cantidadMonedas_i = _supuestoMaletin_go.GetComponent<Maletin>()._numMonedas_i;
-                    _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
-                }
+                _cantidadMonedas_i = _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i;
+                _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
             }
         }
-
-        moverEnicimaCartas();
     }
 
     // ****************** Metodos NUESTROS ****************** //
     protected override void trasAbsorber()
     {
-        if (_objeto_go != null)
+        if (_objetoAbsorbido_go != null)
         {
-            _supuestoMaletin_go = _objeto_go;
-            _objeto_go = null;
-
-
-            _supuestoMaletin_go.GetComponent<Rigidbody2D>().simulated = false;
-
-            _supuestoMaletin_go.transform.SetParent(transform);
+            _objetoAbsorbido_go.GetComponent<Rigidbody2D>().simulated = false;
+            _objetoAbsorbido_go.transform.SetParent(transform);
             moverEncimaMaletin();
-
-            _supuestoMaletin_go.GetComponent<Rigidbody2D>().simulated = true;
         }
     }
 
     void moverEncimaMaletin()
     {
-        _supuestoMaletin_go.transform.rotation = Quaternion.identity;
-        _supuestoMaletin_go.transform.localPosition = new Vector3(-4f, (_alturaObjetoTienda_f / 2) - 1f, 0f);
+        _objetoAbsorbido_go.transform.rotation = Quaternion.identity;
+        _objetoAbsorbido_go.transform.localPosition = new Vector3(-4f, (_alturaObjetoTienda_f / 2) - 1f, 0f);
     }
 
     void moverEnicimaCartas()
@@ -110,9 +95,10 @@ public class Tienda : Absorber
 
     public bool venderCarta(GameObject _cartaAVender_go)
     {
-        Debug.Log("Maletin es null? -> " + (_supuestoMaletin_go == null));
-        if (_supuestoMaletin_go == null)
+        Debug.Log("Maletin es null? -> " + (_objetoAbsorbido_go == null));
+        if (_objetoAbsorbido_go.GetComponent<Maletin>() == null)
             return false;
+
 
         Debug.Log("Carta a vender es null? -> " + (_cartaAVender_go == null));
         if (_cartaAVender_go == null)
@@ -120,20 +106,17 @@ public class Tienda : Absorber
 
 
         int _precio_i = 0;
-        int _monedasIniciales = _supuestoMaletin_go.GetComponent<Maletin>()._numMonedas_i;
+        int _monedasIniciales = _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i;
         bool _vendido_b = false;
 
-        Debug.Log("Monedas iniciales: " + _monedasIniciales);
-
-        
         
         _precio_i = (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
         Debug.Log("Precio: " + _precio_i);
 
-        _supuestoMaletin_go.GetComponent<Maletin>()._numMonedas_i -= (_supuestoMaletin_go.GetComponent<Maletin>()._numMonedas_i >= _precio_i) ? _precio_i : 0;
+        _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i -= (_objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i >= _precio_i) ? _precio_i : 0;
         _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
 
-        _vendido_b = (_monedasIniciales != _supuestoMaletin_go.GetComponent<Maletin>()._numMonedas_i);
+        _vendido_b = (_monedasIniciales != _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i);
         if (_vendido_b)
         {
             if (_cartaAVender_go == _carta1_go)
@@ -172,14 +155,17 @@ public class Tienda : Absorber
     void generarCartas()
     {
         _carta1_go = Instantiate(_PrefabCarta, _puesto1_go.transform);
+        _carta1_go.GetComponent<Rigidbody2D>().simulated = false;
         _carta1_go.GetComponent<Carta>().nivel = _nivel_i;
         _carta1_go.GetComponent<Carta>()._vendiendose_b = true;
 
         _carta2_go = Instantiate(_PrefabCarta, _puesto2_go.transform);
+        _carta2_go.GetComponent<Rigidbody2D>().simulated = false;
         _carta2_go.GetComponent<Carta>().nivel = _nivel_i;
         _carta2_go.GetComponent<Carta>()._vendiendose_b = true;
 
         _carta3_go = Instantiate(_PrefabCarta, _puesto3_go.transform);
+        _carta3_go.GetComponent<Rigidbody2D>().simulated = false;
         _carta3_go.GetComponent<Carta>().nivel = _nivel_i;
         _carta3_go.GetComponent<Carta>()._vendiendose_b = true;
 

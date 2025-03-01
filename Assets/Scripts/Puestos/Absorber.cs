@@ -7,18 +7,18 @@ using System.Collections;
 public abstract class Absorber : MonoBehaviour
 {
     // ****************** DECALRACIONES ****************** //
-    public GameObject _objeto_go;
+    public GameObject _objetoAbsorbido_go;
     protected Animator _animator;
 
 
     // ****************** Metodos UNITY ****************** //
     private void OnTriggerEnter2D(Collider2D _colision)
     {
-        if (_colision.gameObject.CompareTag("Objeto"))
+        if (_colision.gameObject.CompareTag("PadreObjeto"))
         {
             _animator = _colision.gameObject.GetComponentInChildren<Animator>();
             //_animator.Play("Desvanecer");
-            _objeto_go = _colision.gameObject;
+            _objetoAbsorbido_go = _colision.gameObject;
 
             trasAbsorber();
         }

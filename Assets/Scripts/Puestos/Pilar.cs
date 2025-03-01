@@ -25,41 +25,34 @@ public class Pilar : Absorber
             GetComponent<BoxCollider2D>().enabled = false;
 
             _cartaEncima_b = false;
-            _objeto_go = null;
+            _objetoAbsorbido_go = null;
         }
         else
         {
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = true;
             _cartaEncima_b = true;
-
-            // Si dejo de simular las fisicas no puedo volverlo a coger la carta.
-            // Al simularlas la carta se puede mover al poner otra alado.
-            moverEncima();
         }
     }
 
     // ****************** Metodos NUESTROS ****************** //
     protected override void trasAbsorber()
     {
-        //StartCoroutine(AnimacionSecuencial());
-        _animator.Play("Aparecer");
-
-        if (_objeto_go != null)
+        if (_objetoAbsorbido_go.GetComponent<Carta>() != null)
         {
-            _objeto_go.GetComponent<Rigidbody2D>().simulated = false;
+            if (_animator != null)
+                _animator.Play("Aparecer");
 
-            _objeto_go.transform.SetParent(transform);
+            _objetoAbsorbido_go.GetComponent<Rigidbody2D>().simulated = false;
+            _objetoAbsorbido_go.transform.SetParent(transform);
             moverEncima();
-
-            _objeto_go.GetComponent<Rigidbody2D>().simulated = true;
         }
     }
 
     void moverEncima()
     {
-        _objeto_go.transform.rotation = Quaternion.identity;
-        _objeto_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) + 0.8f, 0f);
+        _objetoAbsorbido_go.transform.rotation = Quaternion.identity;
+        _objetoAbsorbido_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) + 0.8f, 0f);
     }
 
     // Desvanecer esta descartado, automaticamente al ejecutar Aparecer pasa a Quieto.
@@ -69,18 +62,18 @@ public class Pilar : Absorber
         yield return StartCoroutine(EsperarAnimacion("Desvanecer", "Aparecer"));
         yield return StartCoroutine(EsperarAnimacion("Aparecer", "Quieto"));
 
-        if (_objeto_go != null)
+        if (_objetoAbsorbido_go != null)
         {
-            Rigidbody2D _rbObjeto_rb = _objeto_go.GetComponent<Rigidbody2D>();
+            Rigidbody2D _rbObjeto_rb = _objetoAbsorbido_go.GetComponent<Rigidbody2D>();
             _rbObjeto_rb.Sleep();
             _rbObjeto_rb.simulated = false;
         }
         float alturaObjeto = gameObject.GetComponent<Renderer>().bounds.size.y;
 
-        _objeto_go.transform.SetParent(transform);
-        _objeto_go.transform.rotation = Quaternion.identity;
-        _objeto_go.transform.localPosition = new Vector3(0f, (alturaObjeto / 2) + 1f, 0f);
+        _objetoAbsorbido_go.transform.SetParent(transform);
+        _objetoAbsorbido_go.transform.rotation = Quaternion.identity;
+        _objetoAbsorbido_go.transform.localPosition = new Vector3(0f, (alturaObjeto / 2) + 1f, 0f);
 
-        _objeto_go = null;
+        _objetoAbsorbido_go = null;
     }
 }
