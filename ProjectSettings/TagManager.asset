@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Objeto
+  - Entidad
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Objeto
   - Suelo
   - Pilares
-  - 
+  - Entidad
   - 
   - 
   - 
