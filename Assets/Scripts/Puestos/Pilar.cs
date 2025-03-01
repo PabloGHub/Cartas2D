@@ -45,7 +45,10 @@ public class Pilar : Absorber
         {
             _objeto_go.GetComponent<Rigidbody2D>().simulated = false;
 
+            _objeto_go.transform.SetParent(transform);
             moverEncima();
+
+            _objeto_go.GetComponent<Rigidbody2D>().simulated = true;
         }
     }
 
@@ -53,11 +56,8 @@ public class Pilar : Absorber
     {
         float alturaObjeto = gameObject.GetComponent<Renderer>().bounds.size.y;
 
-        _objeto_go.transform.SetParent(transform);
         _objeto_go.transform.rotation = Quaternion.identity;
         _objeto_go.transform.localPosition = new Vector3(0f, (alturaObjeto / 2) + 0.8f, 0f);
-
-        _objeto_go.GetComponent<Rigidbody2D>().simulated = true;
     }
 
     // Desvanecer esta descartado, automaticamente al ejecutar Aparecer pasa a Quieto.

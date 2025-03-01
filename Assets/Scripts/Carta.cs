@@ -7,6 +7,7 @@ public class Carta : MonoBehaviour
     // **** Variables **** //
     public int nivel = 1;
     public int _accion_i = 1; // 0 = cura, pa´lante = ataque.
+    public bool _vendiendose_b = true;
 
     // Privados visibles.
     public float _cantidad_f = 0f;
