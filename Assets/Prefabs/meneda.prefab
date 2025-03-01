@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3788015394052430517}
   - component: {fileID: 875533618577872748}
   - component: {fileID: 6781167759284394020}
+  - component: {fileID: 1192805177000243001}
   m_Layer: 14
   m_Name: meneda
   m_TagString: Entidad
@@ -162,3 +163,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &1192805177000243001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972007913217896689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283833c9c3f61a8468567182c2ee0295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

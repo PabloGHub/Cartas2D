@@ -25,9 +25,12 @@ public class Maletin : MonoBehaviour
     {
         if (_colision.gameObject.CompareTag("Entidad"))
         {
-            _numMonedas_i++;
-            _contador_si.text = _numMonedas_i.ToString();
-            Destroy(_colision.gameObject);
+            if (_colision.gameObject.GetComponent<Meneda>() != null)
+            {
+                _numMonedas_i++;
+                _contador_si.text = _numMonedas_i.ToString();
+                Destroy(_colision.gameObject);
+            }
         }
     }
 
