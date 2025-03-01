@@ -7,13 +7,27 @@ public class Tienda : Absorber
     [SerializeField]
     TextMeshProUGUI _contadorMonedas_tp;
     public int _cantidadMonedas_i = 0;
-
     private int _cantidadHijos_i = 0;
+    float _alturaObjetoTienda_f;
+
+    // --- puestos de cartas --- //
+    [SerializeField] GameObject _puesto1_go;
+    [SerializeField] GameObject _puesto2_go;
+    [SerializeField] GameObject _puesto3_go;
+
+    [SerializeField] GameObject _PrefabCarta;
+
+    private GameObject _carta1_go;
+    private GameObject _carta2_go;
+    private GameObject _carta3_go;
 
     // ****************** Metodos Unity ****************** //
     void Start()
     {
         _cantidadHijos_i = transform.childCount;
+        _alturaObjetoTienda_f = gameObject.GetComponent<Renderer>().bounds.size.y;
+
+        siguienteRonda();
     }
 
     void Update()
@@ -31,9 +45,7 @@ public class Tienda : Absorber
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = true;
 
-            // Si dejo de simular las fisicas no puedo volverlo a coger el maletin.
-            // Al simularlas el maletin se puede mover al poner una carta alado.
-            moverEncima();
+            moverEncimaMaletin();
 
             if (_objeto_go != null)
             {
@@ -44,6 +56,8 @@ public class Tienda : Absorber
                 }
             }
         }
+
+        moverEnicimaCartas();
     }
 
     // ****************** Metodos NUESTROS ****************** //
@@ -54,17 +68,64 @@ public class Tienda : Absorber
             _objeto_go.GetComponent<Rigidbody2D>().simulated = false;
 
             _objeto_go.transform.SetParent(transform);
-            moverEncima();
+            moverEncimaMaletin();
 
             _objeto_go.GetComponent<Rigidbody2D>().simulated = true;
         }
     }
 
-    void moverEncima()
+    void moverEncimaMaletin()
     {
-        float alturaObjeto = gameObject.GetComponent<Renderer>().bounds.size.y;
-
         _objeto_go.transform.rotation = Quaternion.identity;
-        _objeto_go.transform.localPosition = new Vector3(-4f, (alturaObjeto / 2) - 1f, 0f);
+        _objeto_go.transform.localPosition = new Vector3(-4f, (_alturaObjetoTienda_f / 2) - 1f, 0f);
+    }
+
+    void moverEnicimaCartas()
+    {
+        if ((_puesto1_go.GetComponentInChildren<Carta>() != null) && (_carta1_go != null))
+        {
+            _carta1_go.transform.rotation = Quaternion.identity;
+            _carta1_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+        }
+
+        if ((_puesto2_go.GetComponentInChildren<Carta>() != null) && (_carta2_go != null))
+        {
+            _carta2_go.transform.rotation = Quaternion.identity;
+            _carta2_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+        }
+
+        if ((_puesto3_go.GetComponentInChildren<Carta>() != null) && (_carta3_go != null))
+        {
+            _carta3_go.transform.rotation = Quaternion.identity;
+            _carta3_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+        }
+    }
+
+    // --- Rondas de Cartas --- //
+    public void siguienteRonda()
+    {
+        Carta _carta1 = _puesto1_go.GetComponentInChildren<Carta>();
+        if (_carta1 != null)
+            Destroy(_carta1.gameObject);
+
+        Carta _carta2 = _puesto2_go.GetComponentInChildren<Carta>();
+        if (_carta2 != null)
+            Destroy(_carta2.gameObject);
+
+        Carta _carta3 = _puesto3_go.GetComponentInChildren<Carta>();
+        if (_carta3 != null)
+            Destroy(_carta3.gameObject);
+
+        generarCartas();
+
+    }
+
+    void generarCartas()
+    {
+        _carta1_go = Instantiate(_PrefabCarta, _puesto1_go.transform);
+        _carta2_go = Instantiate(_PrefabCarta, _puesto2_go.transform);
+        _carta3_go = Instantiate(_PrefabCarta, _puesto3_go.transform);
+
+        moverEnicimaCartas();
     }
 }

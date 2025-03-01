@@ -426,6 +426,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objeto_go: {fileID: 0}
   _contadorMonedas_tp: {fileID: 5655404837447797728}
+  _cantidadMonedas_i: 0
+  _puesto1_go: {fileID: 6566198088676806625}
+  _puesto2_go: {fileID: 4506732397963681446}
+  _puesto3_go: {fileID: 760303225511347035}
+  _PrefabCarta: {fileID: 534564683913696080, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
 --- !u!58 &977610643719313585
 CircleCollider2D:
   m_ObjectHideFlags: 0

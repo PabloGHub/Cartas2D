@@ -8,11 +8,13 @@ public class Pilar : Absorber
 {
     // ****************** Metodos Unity ****************** //
     public bool _cartaEncima_b = false;
+    float _alturaObjetoTienda_f;
 
     // ****************** Metodos Unity ****************** //
     void Start()
     {
-        
+
+        _alturaObjetoTienda_f = gameObject.GetComponent<Renderer>().bounds.size.y;
     }
 
     void Update()
@@ -54,10 +56,8 @@ public class Pilar : Absorber
 
     void moverEncima()
     {
-        float alturaObjeto = gameObject.GetComponent<Renderer>().bounds.size.y;
-
         _objeto_go.transform.rotation = Quaternion.identity;
-        _objeto_go.transform.localPosition = new Vector3(0f, (alturaObjeto / 2) + 0.8f, 0f);
+        _objeto_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) + 0.8f, 0f);
     }
 
     // Desvanecer esta descartado, automaticamente al ejecutar Aparecer pasa a Quieto.
