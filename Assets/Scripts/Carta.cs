@@ -20,7 +20,7 @@ public class Carta : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _accion_i = Random.Range(0, 4);
+        _accion_i = Random.Range(0, 5);
 
         if (_accion_i == 0)
         {

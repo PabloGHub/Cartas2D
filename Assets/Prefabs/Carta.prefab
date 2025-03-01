@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nivel: 1
+  _accion_i: 1
   _cantidad_f: 0
   _cantidad_text: {fileID: 1617288893586111442}
   _imagenAtaque_image: {fileID: 7419437644622782012}

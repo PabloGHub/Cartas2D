@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
             catch (InvalidOperationException _ipe_e)
             {
                 // No sabesmos porque no para de sucecer.
-                // Debug.LogError("Error: " + _ipe_e.Message);
+                Debug.LogError("Error: " + _ipe_e.Message);
             }
         }
     }
@@ -161,8 +161,6 @@ public class Player : MonoBehaviour
             // Salto
             if ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
             {
-                Debug.Log("--SALTAR--");
-
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 inputBufferSalto.Dequeue();
                 _saltar_b = false;

@@ -23,6 +23,7 @@ public class Combate : MonoBehaviour
     [SerializeField] GameObject _pilar2_go;
     [SerializeField] GameObject _pilar3_go;
     [SerializeField] GameObject _pilar4_go;
+    int _pilaresActivos_i = 0;
 
 
     // --- Declaraciones del Combate --- //
@@ -76,18 +77,14 @@ public class Combate : MonoBehaviour
         float _dannoAcer_f = 0;
         float _saludAcer_f = 0;
 
-        int _pilaresActivos_i = 0;
-        if (_pilar1_go.activeInHierarchy) _pilaresActivos_i++;
-        if (_pilar2_go.activeInHierarchy) _pilaresActivos_i++;
-        if (_pilar3_go.activeInHierarchy) _pilaresActivos_i++;
-        if (_pilar4_go.activeInHierarchy) _pilaresActivos_i++;
+        comprobarPialres();
 
         switch (_pilaresActivos_i)
         {
             case 4:
                 if (_pilar4_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    var _carta = _pilar4_go.GetComponentInChildren<Carta>();
+                    Carta _carta = _pilar4_go.GetComponentInChildren<Carta>();
                     if (_carta._accion_i == 0)
                         _saludAcer_f += _carta._cantidad_f;
                     else
@@ -97,7 +94,7 @@ public class Combate : MonoBehaviour
             case 3:
                 if (_pilar3_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    var _carta = _pilar3_go.GetComponentInChildren<Carta>();
+                    Carta _carta = _pilar3_go.GetComponentInChildren<Carta>();
                     if (_carta._accion_i == 0)
                         _saludAcer_f += _carta._cantidad_f;
                     else
@@ -107,7 +104,7 @@ public class Combate : MonoBehaviour
             case 2:
                 if (_pilar2_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    var _carta = _pilar2_go.GetComponentInChildren<Carta>();
+                    Carta _carta = _pilar2_go.GetComponentInChildren<Carta>();
                     if (_carta._accion_i == 0)
                         _saludAcer_f += _carta._cantidad_f;
                     else
@@ -117,7 +114,7 @@ public class Combate : MonoBehaviour
             case 1:
                 if (_pilar1_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    var _carta = _pilar1_go.GetComponentInChildren<Carta>();
+                    Carta _carta = _pilar1_go.GetComponentInChildren<Carta>();
                     if (_carta._accion_i == 0)
                         _saludAcer_f += _carta._cantidad_f;
                     else
@@ -163,6 +160,41 @@ public class Combate : MonoBehaviour
         _TextoSalud_text.text = _salud_f.ToString();
         _TextoEnemigo_text.text = _enemigo_f.ToString();
     }
+
+    // --- Sistema de Pilares --- //
+    void comprobarPialres()
+    {
+        if (_pilar1_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar2_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar3_go.activeInHierarchy) _pilaresActivos_i++;
+        if (_pilar4_go.activeInHierarchy) _pilaresActivos_i++;
+    }
+
+    void activarPilar(GameObject _pilar_go)
+    {
+        _pilar_go.SetActive(true);
+    }
+
+    public void siguientePialar()
+    {
+        comprobarPialres();
+
+        switch (_pilaresActivos_i)
+        {
+            case 1:
+                activarPilar(_pilar2_go);
+            break;
+
+            case 2:
+                activarPilar(_pilar3_go);
+            break;
+
+            case 3:
+                activarPilar(_pilar4_go);
+            break;
+        }
+    }
+
 
     // --- Sistema de Reloj --- //
     void reloj()
