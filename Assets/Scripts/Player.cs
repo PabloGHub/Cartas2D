@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
     // ***********************( Metodos NESTROS )*********************** // 
     bool estaCayendo()
     {
-        return _rb.linearVelocityY < 0;
+        return _rb.linearVelocityY < -0.1f && !_animator_a.GetBool("tocandoSuelo");
     }
 
     // TODO: ir a la izqueierda se bugea.
@@ -125,14 +125,24 @@ public class Player : MonoBehaviour
                     _inputBuffer_q.Dequeue();
                 }
 
+                // Evitar que se quede pulsado A y D.
+                if (_inputBuffer_q.Contains(KeyCode.A) && _inputBuffer_q.Contains(KeyCode.D))
+                {
+                    _animator_a.SetBool("moviendose", false);
+                    _inputBuffer_q.Clear();
+                }
+
                 // Ir izquierda
-                if (_inputBuffer_q.Peek() == KeyCode.A)
+                else if (_inputBuffer_q.Peek() == KeyCode.A)
                 {
                     RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
 
                     if (!_hitArriba_rh && !_hitAbajo_rh)
+                    {
                         _rb.AddForce(new Vector2((0 - _fuerzaMovimiento_f) * Time.deltaTime, 0));
+                        _animator_a.SetBool("moviendose", true);
+                    }
 
 
                     _spriteRenderer.flipX = true;
@@ -151,7 +161,10 @@ public class Player : MonoBehaviour
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
 
                     if (!_hitArriba_rh && !_hitAbajo_rh)
+                    {
                         _rb.AddForce(new Vector2(_fuerzaMovimiento_f * Time.deltaTime, 0));
+                        _animator_a.SetBool("moviendose", true);
+                    }
 
                     _spriteRenderer.flipX = false;
 
