@@ -7,27 +7,37 @@ using System;
 public class Player : MonoBehaviour
 {
     // ***********************( Declaraciones )*********************** //
-    Rigidbody2D _rb;
+    // --- InputBuffer --- //
     Queue<KeyCode> _inputBuffer_q;
     Queue<KeyCode> _inputBufferSalto_q;
-    SpriteRenderer _spriteRenderer;
-    GameObject _objetoRayCast;
-    Animator _animator_a;
 
-    // Declaraciones de Referencias //
+
+    // --- Mascaras --- //
     public LayerMask _MascaraObjetos_lm;
     public LayerMask _MascaraSuelo_lm;
-    [SerializeField]
-    Tienda _tienda_script;
+    
+
+    // --- Variables de coyoteTime/Salto --- //
+    public float coyoteTime = 0.2f;
+    float tiempoEnElAire;
+    private bool _saltar_b = true;
+    private const float _coyoteEpsilon_f = 0.01f; // MQM
 
     // variables comunes //
     bool _levantando = false;
-    float tiempoEnElAire;
-    public float coyoteTime = 0.2f;
     public float _feurzaSalto_f = 10f;
     public float _fuerzaMovimiento_f = 10f;
-    private bool _saltar_b = true;
-    private const float _coyoteEpsilon_f = 0.01f; // MQM
+
+    Rigidbody2D _rb;
+    SpriteRenderer _spriteRenderer;
+    GameObject _objetoRayCast;
+    Animator _animator_a;
+    [SerializeField]
+    Tienda _tienda_script;
+
+    // --- variables de esquinas --- //
+    private bool _poderCorregir_b = true;
+
 
 
 
@@ -338,6 +348,9 @@ public class Player : MonoBehaviour
     // --- Correcion de esquinas --- //
     void esquinas()
     {
+        if (_poderCorregir_b == false)
+            return;
+
         RaycastHit2D raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
         RaycastHit2D raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
        
@@ -349,7 +362,9 @@ public class Player : MonoBehaviour
                 raycastIzquierda = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
                 if (!raycastIzquierda)
                 {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8.5f);
+                    _poderCorregir_b = false;
+                    StartCoroutine(volverCoregir());
                     break; 
                 }
             }
@@ -362,12 +377,21 @@ public class Player : MonoBehaviour
                 raycastDerecha = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.up, 0.25f, _MascaraSuelo_lm);
                 if (!raycastDerecha)
                 {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8);
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, (_feurzaSalto_f / 10) * 8.5f);
+                    _poderCorregir_b = false;
+                    StartCoroutine(volverCoregir());
                     break;
                 }
             }
         }
     }
+
+    IEnumerator volverCoregir()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _poderCorregir_b = true;
+    }
+
     /*
      void esquinas()
     {
