@@ -842,12 +842,24 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: _feurzaSalto_f
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
       propertyPath: _tienda_script
       value: 
       objectReference: {fileID: 44657209}
     - target: {fileID: 3029380820041449184, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
       propertyPath: _fuerzaMovimiento_f
       value: 60000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971167286873638433, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: m_Mass
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971167286873638433, guid: 02af0005cd75c7f48bd263de67cd8264, type: 3}
+      propertyPath: m_GravityScale
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
