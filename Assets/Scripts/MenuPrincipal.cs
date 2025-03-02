@@ -3,21 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject panelOpciones;
+
     void Start()
     {
-        
+        panelOpciones.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void Iniciar()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void AbrirOpciones()
+    {
+        panelOpciones.SetActive(true);
+    }
+
+    public void CerrarOpciones()
+    {
+        panelOpciones.SetActive(false);
         SceneManager.LoadScene(1);
     }
 
