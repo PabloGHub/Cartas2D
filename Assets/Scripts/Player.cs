@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
         return _rb.linearVelocityY < 0;
     }
 
+    // TODO: ir a la izqueierda se bugea.
     bool estaMoviendose()
     {
         return (_rb.linearVelocityX > 0.1f) || (_rb.linearVelocityX < -0.1f);  // (_inputBuffer_q.Count > 0) && 

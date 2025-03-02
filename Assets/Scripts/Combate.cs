@@ -90,53 +90,66 @@ public class Combate : MonoBehaviour
             case 4:
                 if (_pilar4_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    Carta _carta = _pilar4_go.GetComponentInChildren<Carta>();
-                    if (_carta._accion_i == 0)
-                        _saludAcer_f += _carta._cantidad_f;
-                    else
-                        _dannoAcer_f += _carta._cantidad_f;
+                    if (_pilar4_go.GetComponentInChildren<Carta>() != null)
+                    {
+                        Carta _carta = _pilar4_go.GetComponentInChildren<Carta>();
+                        if (_carta._accion_i == 0)
+                            _saludAcer_f += _carta._cantidad_f;
+                        else
+                            _dannoAcer_f += _carta._cantidad_f;
+                    }
                 }
             goto case 3;
             case 3:
                 if (_pilar3_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    Carta _carta = _pilar3_go.GetComponentInChildren<Carta>();
-                    if (_carta._accion_i == 0)
-                        _saludAcer_f += _carta._cantidad_f;
-                    else
-                        _dannoAcer_f += _carta._cantidad_f;
+                    if (_pilar3_go.GetComponent<Carta>() != null)
+                    {
+                        Carta _carta = _pilar3_go.GetComponentInChildren<Carta>();
+                        if (_carta._accion_i == 0)
+                            _saludAcer_f += _carta._cantidad_f;
+                        else
+                            _dannoAcer_f += _carta._cantidad_f;
+                    }
                 }
             goto case 2;
             case 2:
                 if (_pilar2_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    Carta _carta = _pilar2_go.GetComponentInChildren<Carta>();
-                    if (_carta._accion_i == 0)
-                        _saludAcer_f += _carta._cantidad_f;
-                    else
-                        _dannoAcer_f += _carta._cantidad_f;
+                    if (_pilar2_go.GetComponent<Carta>() != null)
+                    {
+                        Carta _carta = _pilar2_go.GetComponentInChildren<Carta>();
+                        if (_carta._accion_i == 0)
+                            _saludAcer_f += _carta._cantidad_f;
+                        else
+                            _dannoAcer_f += _carta._cantidad_f;
+                    }
                 }
             goto case 1;
             case 1:
                 if (_pilar1_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    Carta _carta = _pilar1_go.GetComponentInChildren<Carta>();
-                    if (_carta._accion_i == 0)
-                        _saludAcer_f += _carta._cantidad_f;
-                    else
-                        _dannoAcer_f += _carta._cantidad_f;
+                    if (_pilar1_go.GetComponentInChildren<Carta>() != null)
+                    {
+                        Carta _carta = _pilar1_go.GetComponentInChildren<Carta>();
+                        if (_carta._accion_i == 0)
+                            _saludAcer_f += _carta._cantidad_f;
+                        else
+                            _dannoAcer_f += _carta._cantidad_f;
+                    }
                 }
             break;
         }
 
         _daño_i = (int)_dannoAcer_f;
+        _enemigo_f -= _daño_i;
+
+        _salud_f -= _dañoEnemigo_f;
         _salud_f += _saludAcer_f;
+
         if (_salud_f > _maxSalud_f)
             _salud_f = _maxSalud_f;
 
-        _salud_f -= _dañoEnemigo_f;
-        _enemigo_f -= _daño_i;
-        
         actulizarCartel();
 
         if (_salud_f <= 0)

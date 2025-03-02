@@ -69,7 +69,8 @@ public class Tienda : Absorber
     void moverEncimaMaletin()
     {
         _objetoAbsorbido_go.transform.rotation = Quaternion.identity;
-        _objetoAbsorbido_go.transform.localPosition = new Vector3(-4f, (_alturaObjetoTienda_f / 2) - 1f, 0f);
+        float _alturaObjeto_f = _objetoAbsorbido_go.GetComponent<Renderer>().bounds.size.y;
+        _objetoAbsorbido_go.transform.localPosition = new Vector3(-4f, (_alturaObjeto_f / 2) - 0.5f, 0f);
     }
 
     void moverEnicimaCartas()
@@ -77,19 +78,22 @@ public class Tienda : Absorber
         if ((_puesto1_go.GetComponentInChildren<Carta>() != null) && (_carta1_go != null))
         {
             _carta1_go.transform.rotation = Quaternion.identity;
-            _carta1_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+            float _alturaObjeto_f = _puesto1_go.GetComponentInChildren<Renderer>().bounds.size.y;
+            _carta1_go.transform.localPosition = new Vector3(0f, (_alturaObjeto_f / 2) - 0.5f, 0f);
         }
 
         if ((_puesto2_go.GetComponentInChildren<Carta>() != null) && (_carta2_go != null))
         {
             _carta2_go.transform.rotation = Quaternion.identity;
-            _carta2_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+            float _alturaObjeto_f = _puesto2_go.GetComponentInChildren<Renderer>().bounds.size.y;
+            _carta2_go.transform.localPosition = new Vector3(0f, (_alturaObjeto_f / 2) - 0.5f, 0f);
         }
 
         if ((_puesto3_go.GetComponentInChildren<Carta>() != null) && (_carta3_go != null))
         {
             _carta3_go.transform.rotation = Quaternion.identity;
-            _carta3_go.transform.localPosition = new Vector3(0f, (_alturaObjetoTienda_f / 2) - 0.5f, 0f);
+            float _alturaObjeto_f = _puesto3_go.GetComponentInChildren<Renderer>().bounds.size.y;
+            _carta3_go.transform.localPosition = new Vector3(0f, (_alturaObjeto_f / 2) - 0.5f, 0f);
         }
     }
 
