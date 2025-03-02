@@ -306,17 +306,25 @@ public class Player : MonoBehaviour
 
                     if ((_cartaALevantar_go.GetComponent<Carta>() != null) && (_cartaALevantar_go.GetComponent<Carta>()._vendiendose_b == true))
                     {
-                        if (_tienda_script.venderCarta(_cartaALevantar_go) == false)
+                        if (_tienda_script.venderCarta(_cartaALevantar_go) == true)
+                        {
+                            _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
+
+                            levantarObjeto(_cartaALevantar_go);
+                            _objetoRayCast = _cartaALevantar_go;
+
                             return;
-
-                        _cartaALevantar_go.GetComponent<Carta>()._vendiendose_b = false;
+                        }
                     }
+                    else
+                    {
+                        levantarObjeto(_cartaALevantar_go);
+                        _objetoRayCast = _cartaALevantar_go;
 
-                    levantarObjeto(_cartaALevantar_go);
-                    _objetoRayCast = _cartaALevantar_go;
-
-                    return;
+                        return;
+                    }
                 }
+
             }
         }
     }
