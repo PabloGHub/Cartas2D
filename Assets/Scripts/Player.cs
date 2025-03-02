@@ -172,9 +172,10 @@ public class Player : MonoBehaviour
     }
     void inputBufferSalto()
     {
-        RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
+        RaycastHit2D raycastsueloIz = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.down, 0.25f, _MascaraSuelo_lm);
+        RaycastHit2D raycastsueloDer = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.down, 0.25f, _MascaraSuelo_lm);
 
-        if (raycastsuelo == true)
+        if (raycastsueloIz == true || raycastsueloDer == true)
         {
             tiempoEnElAire = 0;
             _animator_a.SetBool("tocandoSuelo", true);
@@ -200,7 +201,7 @@ public class Player : MonoBehaviour
             // );
 
             // Salto
-            if ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
+            if ((_saltar_b == true) && ((raycastsueloIz == true || raycastsueloDer == true) || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 _inputBufferSalto_q.Dequeue();
