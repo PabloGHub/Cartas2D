@@ -22930,7 +22930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _velocidad_f: 0.5
-  renderEntero: 1
+  renderEntero: 0
 --- !u!1 &2145300972
 GameObject:
   m_ObjectHideFlags: 0
