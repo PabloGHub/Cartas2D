@@ -8,16 +8,15 @@ public class Player : MonoBehaviour
 {
     // ***********************( Declaraciones )*********************** //
     Rigidbody2D _rb;
-    Queue<KeyCode> inputBuffer;
-    Queue<KeyCode> inputBufferSalto;
+    Queue<KeyCode> _inputBuffer_q;
+    Queue<KeyCode> _inputBufferSalto_q;
     SpriteRenderer _spriteRenderer;
     GameObject _objetoRayCast;
+    Animator _animator_a;
 
     // Declaraciones de Referencias //
     public LayerMask _MascaraObjetos_lm;
     public LayerMask _MascaraSuelo_lm;
-    [SerializeField]
-    GameObject _Mano_go;
     [SerializeField]
     Tienda _tienda_script;
 
@@ -37,8 +36,9 @@ public class Player : MonoBehaviour
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        inputBuffer = new Queue<KeyCode>();
-        inputBufferSalto = new Queue<KeyCode>();
+        _inputBuffer_q = new Queue<KeyCode>();
+        _inputBufferSalto_q = new Queue<KeyCode>();
+        _animator_a = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -47,50 +47,85 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            inputBuffer.Enqueue(KeyCode.A);
+            _inputBuffer_q.Enqueue(KeyCode.A);
             Invoke("quitarAccion", 0.5f);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            inputBuffer.Enqueue(KeyCode.D);
+            _inputBuffer_q.Enqueue(KeyCode.D);
             Invoke("quitarAccion", 0.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            inputBufferSalto.Enqueue(KeyCode.Space);
+            _inputBufferSalto_q.Enqueue(KeyCode.Space);
             Invoke("quitarSalto", 0.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            inputBuffer.Enqueue(KeyCode.F);
+            _inputBuffer_q.Enqueue(KeyCode.F);
             Invoke("quitarAccion", 0.5f);
         }
 
-        InputBuffer();
-        InputBufferSalto();
+        inputBuffer();
+        inputBufferSalto();
+
+        // Animaciones
+        if (estaCayendo())
+            _animator_a.SetBool("cayendo", true);
+        else
+            _animator_a.SetBool("cayendo", false);
+        
+
+
+        if (estaMoviendose())
+            _animator_a.SetBool("moviendose", true);
+        else
+            _animator_a.SetBool("moviendose", false);
+        
+
+
+        if (_levantando == true)
+            _animator_a.SetBool("levantandoObjeto", true);
+        else
+            _animator_a.SetBool("levantandoObjeto", false);
+        
+
+        //Debug.Log("cayendo: " + _animator_a.GetBool("cayendo"));
+        //Debug.Log("moviendose: " + _animator_a.GetBool("moviendose"));
+        //Debug.Log("tocandoSuelo: " + _animator_a.GetBool("tocandoSuelo"));
     }
 
 
     // ***********************( Metodos NESTROS )*********************** // 
-    // --- InputBuffer --- //
-    void InputBuffer()
+    bool estaCayendo()
     {
-        if (inputBuffer.Count > 0)
+        return _rb.linearVelocityY < 0;
+    }
+
+    bool estaMoviendose()
+    {
+        return (_rb.linearVelocityX > 0.1f) || (_rb.linearVelocityX < -0.1f);  // (_inputBuffer_q.Count > 0) && 
+    }
+
+    // --- InputBuffer --- //
+    void inputBuffer()
+    {
+        if (_inputBuffer_q.Count > 0)
         {
             try 
             {
                 // Cojer Objeto
-                if (inputBuffer.Peek() == KeyCode.F)
+                if (_inputBuffer_q.Peek() == KeyCode.F)
                 {
                     cojerObjeto();
-                    inputBuffer.Dequeue();
+                    _inputBuffer_q.Dequeue();
                 }
 
                 // Ir izquierda
-                if (inputBuffer.Peek() == KeyCode.A)
+                if (_inputBuffer_q.Peek() == KeyCode.A)
                 {
                     RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
@@ -101,15 +136,15 @@ public class Player : MonoBehaviour
 
                     _spriteRenderer.flipX = true;
 
-                    Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-                    _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
-                    _Mano_go.transform.localPosition = _manoPosicion_v3;
+                    // Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                    // _manoPosicion_v3.x = -Mathf.Abs(_manoPosicion_v3.x);
+                    // _Mano_go.transform.localPosition = _manoPosicion_v3;
 
-                    inputBuffer.Dequeue();
+                    _inputBuffer_q.Dequeue();
                 }
 
                 // Ir derecha
-                else if (inputBuffer.Peek() == KeyCode.D)
+                else if (_inputBuffer_q.Peek() == KeyCode.D)
                 {
                     RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
@@ -119,11 +154,11 @@ public class Player : MonoBehaviour
 
                     _spriteRenderer.flipX = false;
 
-                    Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
-                    _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
-                    _Mano_go.transform.localPosition = _manoPosicion_v3;
+                    // Vector3 _manoPosicion_v3 = _Mano_go.transform.localPosition;
+                    // _manoPosicion_v3.x = Mathf.Abs(_manoPosicion_v3.x);
+                    // _Mano_go.transform.localPosition = _manoPosicion_v3;
 
-                    inputBuffer.Dequeue();
+                    _inputBuffer_q.Dequeue();
                 }
             }
             catch (InvalidOperationException _ipe_e)
@@ -134,21 +169,23 @@ public class Player : MonoBehaviour
             }
         }
     }
-    void InputBufferSalto()
+    void inputBufferSalto()
     {
         RaycastHit2D raycastsuelo = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, _MascaraSuelo_lm);
 
         if (raycastsuelo == true)
         {
             tiempoEnElAire = 0;
+            _animator_a.SetBool("tocandoSuelo", true);
         }
         else
         {
             tiempoEnElAire += Time.deltaTime;
+            _animator_a.SetBool("tocandoSuelo", false);
         }
 
 
-        if (inputBufferSalto.Count > 0)
+        if (_inputBufferSalto_q.Count > 0)
         {
             // Debug.Log
             // (
@@ -165,7 +202,7 @@ public class Player : MonoBehaviour
             if ((_saltar_b == true) && (raycastsuelo == true || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
-                inputBufferSalto.Dequeue();
+                _inputBufferSalto_q.Dequeue();
                 _saltar_b = false;
                 StartCoroutine(saltarTrue());
             }
@@ -181,20 +218,21 @@ public class Player : MonoBehaviour
 
     void quitarAccion()
     {
-        if (inputBuffer.Count > 0)
-            inputBuffer.Dequeue();
+        if (_inputBuffer_q.Count > 0)
+            _inputBuffer_q.Dequeue();
     }
     void quitarSalto()
     {
-        if (inputBufferSalto.Count > 0)
-            inputBufferSalto.Dequeue();
+        if (_inputBufferSalto_q.Count > 0)
+            _inputBufferSalto_q.Dequeue();
     }
+    
 
     IEnumerator quitarAccionConRetraso()
     {
         yield return new WaitForSeconds(0.5f);
-        if (inputBuffer.Count > 0)
-            inputBuffer.Dequeue();
+        if (_inputBuffer_q.Count > 0)
+            _inputBuffer_q.Dequeue();
     }
 
 
