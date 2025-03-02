@@ -156,7 +156,7 @@ public class Combate : MonoBehaviour
             }
             _enemigo_f = _maxEnemigo_f;
 
-            intanciarMenedas();
+            intanciarMenedas(_dañoEnemigo_f);
 
             _dañoEnemigo_f += _nivel_i;
         }
@@ -177,9 +177,9 @@ public class Combate : MonoBehaviour
         _TextoEnemigo_text.text = _enemigo_f.ToString();
     }
 
-    void intanciarMenedas()
+    public void intanciarMenedas(float _cantidad_f)
     {
-        int _cantidad_i = (int)((_dañoEnemigo_f / 2) + 0.25f) + 2;
+        int _cantidad_i = (int)((_cantidad_f / 2) + 0.25f) + 2;
         for (int i = 0; i <= _cantidad_i; i++)
         {
             Vector3 _posicion_v3;

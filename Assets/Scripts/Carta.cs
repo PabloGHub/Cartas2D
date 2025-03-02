@@ -9,9 +9,9 @@ public class Carta : MonoBehaviour
     public int _accion_i = 1; // 0 = cura, pa´lante = ataque.
     public bool _vendiendose_b = false;
     public int _rango_i = 4;
+    public float _cantidad_f = 0f;
 
     // Privados visibles.
-    public float _cantidad_f = 0f;
     [SerializeField]
     private TextMeshProUGUI _cantidad_text;
     [SerializeField]

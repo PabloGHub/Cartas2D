@@ -38,7 +38,7 @@ public class Pilar : Absorber
     // ****************** Metodos NUESTROS ****************** //
     protected override void trasAbsorber()
     {
-        if (_objetoAbsorbido_go.GetComponent<Carta>() != null)
+        if (_objetoAbsorbido_go != null)
         {
             if (_animator != null)
                 _animator.Play("Aparecer");
