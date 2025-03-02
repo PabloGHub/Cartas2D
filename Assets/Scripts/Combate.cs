@@ -179,7 +179,7 @@ public class Combate : MonoBehaviour
 
     public void intanciarMenedas(float _cantidad_f)
     {
-        int _cantidad_i = (int)((_cantidad_f / 2) + 0.25f) + 2;
+        int _cantidad_i = ((int)((_cantidad_f / 2) + 0.25f)) + 1;
         for (int i = 0; i <= _cantidad_i; i++)
         {
             Vector3 _posicion_v3;

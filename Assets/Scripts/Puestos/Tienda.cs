@@ -47,9 +47,9 @@ public class Tienda : Absorber
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = true;
 
-            if (_objetoAbsorbido_go.GetComponent<Maletin>() != null)
+            if (_objetoAbsorbido_go.GetComponentInChildren<Maletin>() != null)
             {
-                _cantidadMonedas_i = _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i;
+                _cantidadMonedas_i = _objetoAbsorbido_go.GetComponentInChildren<Maletin>()._numMonedas_i;
                 _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
             }
         }
@@ -96,7 +96,10 @@ public class Tienda : Absorber
     public bool venderCarta(GameObject _cartaAVender_go)
     {
         Debug.Log("Maletin es null? -> " + (_objetoAbsorbido_go == null));
-        if (_objetoAbsorbido_go.GetComponent<Maletin>() == null)
+        if (_objetoAbsorbido_go == null)
+            return false;
+
+        if (_objetoAbsorbido_go.GetComponentInChildren<Maletin>() == null)
             return false;
 
 
@@ -106,17 +109,17 @@ public class Tienda : Absorber
 
 
         int _precio_i = 0;
-        int _monedasIniciales = _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i;
+        int _monedasIniciales = _objetoAbsorbido_go.GetComponentInChildren<Maletin>()._numMonedas_i;
         bool _vendido_b = false;
 
         
         _precio_i = (int)(_cartaAVender_go.GetComponent<Carta>()._cantidad_f + 0.2f);
         Debug.Log("Precio: " + _precio_i);
 
-        _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i -= (_objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i >= _precio_i) ? _precio_i : 0;
+        _objetoAbsorbido_go.GetComponentInChildren<Maletin>()._numMonedas_i -= (_objetoAbsorbido_go.GetComponentInChildren<Maletin>()._numMonedas_i >= _precio_i) ? _precio_i : 0;
         _contadorMonedas_tp.text = _cantidadMonedas_i.ToString();
 
-        _vendido_b = (_monedasIniciales != _objetoAbsorbido_go.GetComponent<Maletin>()._numMonedas_i);
+        _vendido_b = (_monedasIniciales != _objetoAbsorbido_go.GetComponentInChildren<Maletin>()._numMonedas_i);
         if (_vendido_b)
         {
             if (_cartaAVender_go == _carta1_go)
