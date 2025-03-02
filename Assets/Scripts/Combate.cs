@@ -10,8 +10,8 @@ public class Combate : MonoBehaviour
     [SerializeField] Image _barraEnemigo_image;
     [SerializeField] Image _barraTiempo_image;
 
-    public float _maxSalud_f = 60;
-    public float _maxEnemigo_f = 25;
+    public float _maxSalud_f = 30;
+    public float _maxEnemigo_f = 20;
     public float _maxTiempo_f = 21;
 
     float _salud_f;
@@ -30,6 +30,7 @@ public class Combate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _TextoDañoEnemigo_text;
     [SerializeField] private TextMeshProUGUI _TextoSalud_text;
     [SerializeField] private TextMeshProUGUI _TextoEnemigo_text;
+    [SerializeField] private TextMeshProUGUI _TextoNivel_text;
 
     public int _nivel_i = 1;
     float _dañoEnemigo_f = 1f;
@@ -151,8 +152,8 @@ public class Combate : MonoBehaviour
             if (_enemigosAbatidos_i % 2 == 0)
             {
                 _nivel_i++;
-                _maxEnemigo_f += 25;
-                _maxSalud_f += 20;
+                _maxEnemigo_f += 10;
+                _maxSalud_f += 10;
             }
             _enemigo_f = _maxEnemigo_f;
 
@@ -163,6 +164,7 @@ public class Combate : MonoBehaviour
 
         _tienda_script.siguienteRonda();
         _tienda_script._nivel_i = _nivel_i;
+        _TextoNivel_text.text = _nivel_i.ToString();
 
         actulizarCartel();
     }
