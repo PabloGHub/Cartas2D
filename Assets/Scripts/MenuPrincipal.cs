@@ -20,4 +20,14 @@ public class MenuPrincipal : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
+
+    public void Salir()
+    {
+        Application.Quit();
+    }
+
+    public void volverMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
