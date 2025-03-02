@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Combate : MonoBehaviour
@@ -154,9 +155,8 @@ public class Combate : MonoBehaviour
 
         if (_salud_f <= 0)
         {
-            // TODO: Implementar la muerte.
             Debug.Log("LLevar a muerte");
-            _salud_f = _maxSalud_f;
+            SceneManager.LoadScene(2);
         }
 
         if (_enemigo_f <= 0)
