@@ -18,7 +18,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void Iniciar()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(1);
     }
 
     public void Salir()
