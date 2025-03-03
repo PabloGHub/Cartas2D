@@ -23,8 +23,8 @@ public class Volumen : MonoBehaviour
     {
         sliderValue = valor;
         float _decibelios = 20 * (float)Math.Log10(valor / 100);
-        audioMixer.SetFloat("Murcia", _decibelios);
-        AudioListener.volume = slider.value;
+        audioMixer.SetFloat("MurciaVOL", _decibelios);
+        //AudioListener.volume = slider.value;
         RevisarSiEstoyMute();
     }
 
