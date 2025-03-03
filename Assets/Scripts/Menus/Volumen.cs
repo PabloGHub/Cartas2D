@@ -24,32 +24,21 @@ public class Volumen : MonoBehaviour // Bonito es B
     void Start()
     {
         // Musica
-        float _volumenMusica;
-        audioMixer.GetFloat("MurciaVOL", out _volumenMusica);
-
-        if (_volumenMusica <= 0)
-            sliderMusica.value = 0.5f;
-        else
-            sliderMusica.value = (float)Math.Log10(_volumenMusica);
-
-        RevisarSiEstoyMuteMusica();
+        sliderMusica.value = PlayerPrefs.GetFloat("VolumenMusica", 0.5f);
+        cambiarMusica(sliderMusica.value);
 
         // Efectos
-        float _volumenEfectos;
-        audioMixer.GetFloat("SFXVOL", out _volumenEfectos);
-
-        if (_volumenEfectos <= 0)
-            sliderEfectos.value = 0.5f;
-        else
-            sliderEfectos.value = (float)Math.Log10(_volumenEfectos);
-
-        RevisarSiEstoyMuteEfectos();
+        sliderEfectos.value = PlayerPrefs.GetFloat("VolumenEfectos", 0.5f);
+        cambiarEfectos(sliderMusica.value);
     }
 
 
     public void cambiarMusica(float valor)
     {
         sliderValueMusica = valor;
+
+        PlayerPrefs.SetFloat("VolumenMusica", valor);
+        PlayerPrefs.Save();
 
         if (valor > 0)
             audioMixer.SetFloat("MurciaVOL", 20 * (float)Math.Log10(valor));
@@ -61,6 +50,9 @@ public class Volumen : MonoBehaviour // Bonito es B
     public void cambiarEfectos(float valor)
     {
         sliderValueEfectos = valor;
+
+        PlayerPrefs.SetFloat("VolumenEfectos", valor);
+        PlayerPrefs.Save();
 
         if (valor > 0)
             audioMixer.SetFloat("SFXVOL", 20 * (float)Math.Log10(valor));
