@@ -2267,7 +2267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11346,7 +11346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11401,9 +11401,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75215f8a82dd01340bcf1e1961697f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 283495728}
-  sliderValue: 0
-  imagenMute: {fileID: 562481343}
+  sliderMusica: {fileID: 283495728}
+  sliderValueMusica: 0
+  imagenMuteMusica: {fileID: 562481342}
+  sliderEfectos: {fileID: 1545531631}
+  sliderValueEfectos: 0
+  imagenMuteEfectos: {fileID: 1229047600}
   audioMixer: {fileID: 24100000, guid: 75b0658030bec3b4392c3aecbea3bcd4, type: 2}
 --- !u!4 &1700854477
 Transform:

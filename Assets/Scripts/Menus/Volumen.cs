@@ -7,54 +7,90 @@ using UnityEngine.UI;
 
 public class Volumen : MonoBehaviour // Bonito es B
 {
-    public Slider slider;
-    public float sliderValue;
-    public Image imagenMute;
+    // --- Variables Musica --- //
+    public Slider sliderMusica;
+    public float sliderValueMusica;
+    public GameObject imagenMuteMusica;
+
+    // --- Variables Efectos --- //
+    public Slider sliderEfectos;
+    public float sliderValueEfectos;
+    public GameObject imagenMuteEfectos;
+
+    // --- AudioMixer --- //
     public AudioMixer audioMixer;
+
     // Start is called before the first frame update
     void Start()
     {
-        float _volumen;
-        audioMixer.GetFloat("MurciaVOL", out _volumen);
+        // Musica
+        float _volumenMusica;
+        audioMixer.GetFloat("MurciaVOL", out _volumenMusica);
 
-        if (_volumen <= 0)
-            slider.value = 0.5f;
+        if (_volumenMusica <= 0)
+            sliderMusica.value = 0.5f;
         else
-            slider.value = (float)Math.Log10(_volumen);
+            sliderMusica.value = (float)Math.Log10(_volumenMusica);
 
-        Debug.Log("Volumen: " + _volumen);
+        RevisarSiEstoyMuteMusica();
 
-        //AudioListener.volume = slider.value;
-        RevisarSiEstoyMute();
+        // Efectos
+        float _volumenEfectos;
+        audioMixer.GetFloat("SFXVOL", out _volumenEfectos);
+
+        if (_volumenEfectos <= 0)
+            sliderEfectos.value = 0.5f;
+        else
+            sliderEfectos.value = (float)Math.Log10(_volumenEfectos);
+
+        RevisarSiEstoyMuteEfectos();
     }
 
-    public void ChangeSlider(float valor)
-    {
-        sliderValue = valor;
 
+    public void cambiarMusica(float valor)
+    {
+        sliderValueMusica = valor;
 
         if (valor > 0)
             audioMixer.SetFloat("MurciaVOL", 20 * (float)Math.Log10(valor));
         else
             audioMixer.SetFloat("MurciaVOL", -80);
 
-        //audioMixer.SetFloat("MurciaVOL", _decibelios);
+        RevisarSiEstoyMuteMusica();
+    }
+    public void cambiarEfectos(float valor)
+    {
+        sliderValueEfectos = valor;
 
-        Debug.Log("Volumen: " + valor);
+        if (valor > 0)
+            audioMixer.SetFloat("SFXVOL", 20 * (float)Math.Log10(valor));
+        else
+            audioMixer.SetFloat("SFXVOL", -80);
 
-        RevisarSiEstoyMute();
+        RevisarSiEstoyMuteMusica();
     }
 
-    private void RevisarSiEstoyMute()
+
+    private void RevisarSiEstoyMuteMusica()
     {
-        if (sliderValue <= 0)
+        if (sliderValueMusica <= 0)
         {
-            imagenMute.enabled = true;
+            imagenMuteMusica.SetActive(true);
         }
         else
         {
-            imagenMute.enabled = false;
+            imagenMuteMusica.SetActive(false);
         }
-
+    }
+    private void RevisarSiEstoyMuteEfectos()
+    {
+        if (sliderValueEfectos <= 0)
+        {
+            imagenMuteEfectos.SetActive(true);
+        }
+        else
+        {
+            imagenMuteEfectos.SetActive(false);
+        }
     }
 }
