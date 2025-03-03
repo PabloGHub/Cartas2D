@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class Volumen : MonoBehaviour
@@ -9,6 +10,7 @@ public class Volumen : MonoBehaviour
     public Slider slider;
     public float sliderValue;
     public Image imagenMute;
+    public AudioMixer audioMixer;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,8 @@ public class Volumen : MonoBehaviour
     public void ChangeSlider(float valor)
     {
         sliderValue = valor;
-        PlayerPrefs.SetFloat("volumenAudio", sliderValue);
+        float _decibelios = 20 * (float)Math.Log10(valor / 100);
+        audioMixer.SetFloat("Murcia", _decibelios);
         AudioListener.volume = slider.value;
         RevisarSiEstoyMute();
     }

@@ -1850,81 +1850,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &785660529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 785660532}
-  - component: {fileID: 785660531}
-  - component: {fileID: 785660530}
-  m_Layer: 5
-  m_Name: Brillopanel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &785660530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785660529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.19607843}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &785660531
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785660529}
-  m_CullTransparentMesh: 1
---- !u!224 &785660532
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785660529}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1325041979}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3977, y: 716.97}
-  m_SizeDelta: {x: 8641.25, y: 4494.81}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &819643506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2559,7 +2484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BRILLO
+  m_text: EFECTO DE SONIDO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73c0496655685d64a8733b615a6e1ca7, type: 2}
   m_sharedMaterial: {fileID: -8033423905428148839, guid: 73c0496655685d64a8733b615a6e1ca7, type: 2}
@@ -2862,7 +2787,7 @@ AudioSource:
   m_GameObject: {fileID: 1107408071}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5727961635375224817, guid: 75b0658030bec3b4392c3aecbea3bcd4, type: 2}
   m_audioClip: {fileID: 8300000, guid: 488799327f7785c4abaa3b35e9953426, type: 3}
   m_Resource: {fileID: 8300000, guid: 488799327f7785c4abaa3b35e9953426, type: 3}
   m_PlayOnAwake: 1
@@ -3864,7 +3789,6 @@ RectTransform:
   - {fileID: 960944465}
   - {fileID: 562481345}
   - {fileID: 1545531630}
-  - {fileID: 785660532}
   - {fileID: 1064262576}
   m_Father: {fileID: 1114991123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11327,6 +11251,7 @@ MonoBehaviour:
   slider: {fileID: 283495728}
   sliderValue: 0
   imagenMute: {fileID: 562481343}
+  audioMixer: {fileID: 24100000, guid: 75b0658030bec3b4392c3aecbea3bcd4, type: 2}
 --- !u!4 &1700854477
 Transform:
   m_ObjectHideFlags: 0
@@ -11349,14 +11274,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700854475}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9d3b97c652368343a113bbe18e018ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1545531631}
   sliderValue: 0
-  panelBrillo: {fileID: 785660530}
+  panelBrillo: {fileID: 0}
   valorBlack: 0
   valorWhite: 0
 --- !u!1 &1736726839
