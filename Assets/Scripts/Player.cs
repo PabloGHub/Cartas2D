@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
 
     // --- variables de Audio --- //
     AudioSource _audioSource_as;
+    [SerializeField] private AudioClip _sonidoSalto;
+    [SerializeField] private AudioClip _sonidoCaminar;
+    [SerializeField] private AudioClip _sonidoMoneda;
 
     // --- variables de esquinas --- //
     private bool _poderCorregir_b = true;
@@ -116,11 +119,12 @@ public class Player : MonoBehaviour
         if (_animator_a.GetBool("cayendo") && _animator_a.GetBool("tocandoSuelo") == false)
         {
 
+
         }
 
-        if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo"))
+        if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo") && !_audioSource_as.isPlaying)
         {
-            //_audioSource_as;
+            _audioSource_as.PlayOneShot(_sonidoCaminar, 0.7f);
         }
     }
 
