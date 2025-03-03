@@ -7,6 +7,8 @@ using System;
 public class Player : MonoBehaviour
 {
     // ***********************( Declaraciones )*********************** //
+    public bool _pausado_b = false;
+
     // --- InputBuffer --- //
     Queue<KeyCode> _inputBuffer_q;
     Queue<KeyCode> _inputBufferSalto_q;
@@ -40,12 +42,16 @@ public class Player : MonoBehaviour
     AudioSource _audioSource_as;
     [SerializeField] private AudioClip _sonidoSalto;
     private AudioClip _sonidoCaminar;
-    [SerializeField] private AudioClip _sonidoMoneda;
+    [SerializeField] private AudioClip[] _pasos_array_ac;
 
     // --- variables de esquinas --- //
     private bool _poderCorregir_b = true;
 
-
+    // --- Teclas de Movimiento Personalizadas --- //
+    private KeyCode teclaIzquierda;
+    private KeyCode teclaDerecha;
+    private KeyCode teclaSalto;
+    private KeyCode teclaAccion;
 
 
     // ***********************( Metodos de UNITY )*********************** //
@@ -57,40 +63,56 @@ public class Player : MonoBehaviour
         _inputBufferSalto_q = new Queue<KeyCode>();
         _animator_a = gameObject.GetComponent<Animator>();
         _audioSource_as = GetComponentInParent<AudioSource>();
+
+        // --- teclas personalizadas --- //
+        teclaIzquierda = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("TeclaIzquierda", KeyCode.A.ToString()));
+        teclaDerecha = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("TeclaDerecha", KeyCode.D.ToString()));
+        teclaSalto = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("TeclaSalto", KeyCode.Space.ToString()));
+        teclaAccion = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("TeclaAccion", KeyCode.F.ToString()));
     }
 
     void Update()
     {
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _pausado_b = _pausado_b ? false : true;
+            //Time.timeScale = _pausado_b ? 0 : 1;
+            return;
+        }
+        else if (_pausado_b)
+            return;
+
         esquinas();
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(teclaIzquierda))
         {
-            _inputBuffer_q.Enqueue(KeyCode.A);
+            _inputBuffer_q.Enqueue(teclaIzquierda);
             Invoke("quitarAccion", 0.5f);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(teclaDerecha))
         {
-            _inputBuffer_q.Enqueue(KeyCode.D);
+            _inputBuffer_q.Enqueue(teclaDerecha);
             Invoke("quitarAccion", 0.5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(teclaSalto))
         {
-            _inputBufferSalto_q.Enqueue(KeyCode.Space);
+            _inputBufferSalto_q.Enqueue(teclaSalto);
             Invoke("quitarSalto", 0.5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(teclaAccion))
         {
-            _inputBuffer_q.Enqueue(KeyCode.F);
+            _inputBuffer_q.Enqueue(teclaAccion);
             Invoke("quitarAccion", 0.5f);
         }
 
         inputBuffer();
         inputBufferSalto();
 
-        // Animaciones
+        // **** Animaciones
         if (estaCayendo())
             _animator_a.SetBool("cayendo", true);
         else
@@ -109,26 +131,27 @@ public class Player : MonoBehaviour
             _animator_a.SetBool("levantandoObjeto", true);
         else
             _animator_a.SetBool("levantandoObjeto", false);
-        
+
 
         //Debug.Log("cayendo: " + _animator_a.GetBool("cayendo"));
         //Debug.Log("moviendose: " + _animator_a.GetBool("moviendose"));
         //Debug.Log("tocandoSuelo: " + _animator_a.GetBool("tocandoSuelo"));
 
-        // Audio
-        if (_animator_a.GetBool("cayendo") && _animator_a.GetBool("tocandoSuelo") == false)
+        // **** Audio
+        if
+        (
+            _animator_a.GetBool("moviendose") &&
+            _animator_a.GetBool("tocandoSuelo") &&
+            !_animator_a.GetBool("cayendo") &&
+            !_audioSource_as.isPlaying
+        )
         {
-
-
-        }
-
-        if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo") && !_audioSource_as.isPlaying)
-        {
-            if (_audioSource_as != null && _audioSource_as.clip != null)
+            if (_audioSource_as != null && _pasos_array_ac.Length > 0)
             {
-                _audioSource_as.Play();
+                _audioSource_as.PlayOneShot(_pasos_array_ac[UnityEngine.Random.Range(0, _pasos_array_ac.Length)]);
             }
         }
+        
     }
 
 
@@ -138,7 +161,6 @@ public class Player : MonoBehaviour
         return _rb.linearVelocityY < -0.1f && !_animator_a.GetBool("tocandoSuelo");
     }
 
-    // TODO: ir a la izqueierda se bugea.
     bool estaMoviendose()
     {
         return (_rb.linearVelocityX > 0.1f) || (_rb.linearVelocityX < -0.1f);  // (_inputBuffer_q.Count > 0) && 
@@ -152,21 +174,21 @@ public class Player : MonoBehaviour
             try 
             {
                 // Cojer Objeto
-                if (_inputBuffer_q.Peek() == KeyCode.F)
+                if (_inputBuffer_q.Peek() == teclaAccion)
                 {
                     cojerObjeto();
                     _inputBuffer_q.Dequeue();
                 }
 
                 // Evitar que se quede pulsado A y D.
-                if (_inputBuffer_q.Contains(KeyCode.A) && _inputBuffer_q.Contains(KeyCode.D))
+                if (_inputBuffer_q.Contains(teclaIzquierda) && _inputBuffer_q.Contains(teclaDerecha))
                 {
                     _animator_a.SetBool("moviendose", false);
                     _inputBuffer_q.Clear();
                 }
 
                 // Ir izquierda
-                else if (_inputBuffer_q.Peek() == KeyCode.A)
+                else if (_inputBuffer_q.Peek() == teclaIzquierda)
                 {
                     RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(-0.5f, -1f), Vector2.left, 0.2f, _MascaraSuelo_lm);
@@ -188,7 +210,7 @@ public class Player : MonoBehaviour
                 }
 
                 // Ir derecha
-                else if (_inputBuffer_q.Peek() == KeyCode.D)
+                else if (_inputBuffer_q.Peek() == teclaDerecha)
                 {
                     RaycastHit2D _hitArriba_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, 1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
                     RaycastHit2D _hitAbajo_rh = Physics2D.Raycast(transform.position + new Vector3(0.5f, -1f), Vector2.right, 0.2f, _MascaraSuelo_lm);
@@ -249,8 +271,11 @@ public class Player : MonoBehaviour
             // Salto
             if ((_saltar_b == true) && ((raycastsueloIz == true || raycastsueloDer == true) || tiempoEnElAire < (coyoteTime - _coyoteEpsilon_f)))
             {
+                _audioSource_as.PlayOneShot(_sonidoSalto);
+
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _feurzaSalto_f);
                 _inputBufferSalto_q.Dequeue();
+
                 _saltar_b = false;
                 StartCoroutine(saltarTrue());
             }

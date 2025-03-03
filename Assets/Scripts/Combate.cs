@@ -45,6 +45,8 @@ public class Combate : MonoBehaviour
     GameObject _PrefabMeneda_go;
 
     // --- Declaraciones de Reloj --- //
+    [SerializeField]
+    Player _player_script;
     float _tiempoReloj_f = 0;
     int _segundos_i = 0;
 
@@ -72,7 +74,7 @@ public class Combate : MonoBehaviour
         _tiempo_f--;
         _barraTiempo_image.fillAmount = _tiempo_f / _maxTiempo_f;
 
-        if (_tiempo_f <= 0)
+        if (_tiempo_f < 0)
         {
             _tiempo_f = _maxTiempo_f;
             siguienteTurno();
@@ -247,6 +249,9 @@ public class Combate : MonoBehaviour
     // --- Sistema de Reloj --- //
     void reloj()
     {
+        if (_player_script._pausado_b)
+            return;
+
         _tiempoReloj_f += Time.deltaTime;
 
         if (_tiempoReloj_f >= 1)
