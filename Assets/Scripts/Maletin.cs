@@ -5,12 +5,13 @@ public class Maletin : MonoBehaviour
 {
     // ****************** Declaraciones ****************** //
     public int _numMonedas_i = 0;
-    [SerializeField]
-    TextMeshProUGUI _contador_si;
+    [SerializeField] private TextMeshProUGUI _contador_si;
+    private AudioSource _audioSource;
 
     // ****************** Metodos UNITY ****************** //
     void Start()
     {
+           _audioSource = GetComponentInParent<AudioSource>();
         
     }
 
@@ -23,10 +24,17 @@ public class Maletin : MonoBehaviour
     {
         if (_colision.gameObject.CompareTag("Entidad"))
         {
-            if (_colision.gameObject.GetComponent<Meneda>() != null)
+            Meneda moneda = _colision.gameObject.GetComponent<Meneda>();
+            if (moneda != null)
             {
                 _numMonedas_i++;
                 _contador_si.text = _numMonedas_i.ToString();
+
+                if (_audioSource != null && _audioSource.clip != null)
+                {
+                    _audioSource.Play();
+                }
+
                 Destroy(_colision.gameObject);
             }
         }
