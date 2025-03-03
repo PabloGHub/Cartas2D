@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class Volumen : MonoBehaviour
+public class Volumen : MonoBehaviour // Bonito es B
 {
     public Slider slider;
     public float sliderValue;
