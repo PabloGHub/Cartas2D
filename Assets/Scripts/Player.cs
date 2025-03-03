@@ -35,6 +35,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     Tienda _tienda_script;
 
+
+    // --- variables de Audio --- //
+    AudioSource _audioSource_as;
+
     // --- variables de esquinas --- //
     private bool _poderCorregir_b = true;
 
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
         _inputBuffer_q = new Queue<KeyCode>();
         _inputBufferSalto_q = new Queue<KeyCode>();
         _animator_a = gameObject.GetComponent<Animator>();
+        _audioSource_as = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -106,6 +111,17 @@ public class Player : MonoBehaviour
         //Debug.Log("cayendo: " + _animator_a.GetBool("cayendo"));
         //Debug.Log("moviendose: " + _animator_a.GetBool("moviendose"));
         //Debug.Log("tocandoSuelo: " + _animator_a.GetBool("tocandoSuelo"));
+
+        // Audio
+        if (_animator_a.GetBool("cayendo") && _animator_a.GetBool("tocandoSuelo") == false)
+        {
+
+        }
+
+        if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo"))
+        {
+            _audioSource_as ==
+        }
     }
 
 
