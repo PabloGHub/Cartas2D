@@ -14,17 +14,34 @@ public class Volumen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f); // ¿?
-        AudioListener.volume = slider.value;
+        float _volumen;
+        audioMixer.GetFloat("MurciaVOL", out _volumen);
+
+        if (_volumen <= 0)
+            slider.value = 0.5f;
+        else
+            slider.value = (float)Math.Log10(_volumen);
+
+        Debug.Log("Volumen: " + _volumen);
+
+        //AudioListener.volume = slider.value;
         RevisarSiEstoyMute();
     }
 
     public void ChangeSlider(float valor)
     {
         sliderValue = valor;
-        float _decibelios = 20 * (float)Math.Log10(valor / 100);
-        audioMixer.SetFloat("MurciaVOL", _decibelios);
-        //AudioListener.volume = slider.value;
+
+
+        if (valor > 0)
+            audioMixer.SetFloat("MurciaVOL", 20 * (float)Math.Log10(valor));
+        else
+            audioMixer.SetFloat("MurciaVOL", -80);
+
+        //audioMixer.SetFloat("MurciaVOL", _decibelios);
+
+        Debug.Log("Volumen: " + valor);
+
         RevisarSiEstoyMute();
     }
 
