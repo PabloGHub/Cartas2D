@@ -4080,7 +4080,7 @@ GameObject:
   - component: {fileID: 1545531630}
   - component: {fileID: 1545531631}
   m_Layer: 5
-  m_Name: Brillo
+  m_Name: Efectos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4160,7 +4160,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1700854478}
-        m_TargetAssemblyTypeName: Brillo, Assembly-CSharp
+        m_TargetAssemblyTypeName: Efectos, Assembly-CSharp
         m_MethodName: ChangeSlider
         m_Mode: 0
         m_Arguments:
