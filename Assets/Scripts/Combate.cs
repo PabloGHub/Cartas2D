@@ -169,6 +169,7 @@ public class Combate : MonoBehaviour
                 _nivel_i++;
                 _maxEnemigo_f += 10;
                 _maxSalud_f += 10;
+                _maxTiempo_f++;
             }
             _enemigo_f = _maxEnemigo_f;
 

@@ -634,7 +634,7 @@ MonoBehaviour:
   _barraTiempo_image: {fileID: 200996024}
   _maxSalud_f: 30
   _maxEnemigo_f: 20
-  _maxTiempo_f: 10
+  _maxTiempo_f: 5
   _pilar1_go: {fileID: 8636595}
   _pilar2_go: {fileID: 1655430020313013773}
   _pilar3_go: {fileID: 1655430020313013772}
