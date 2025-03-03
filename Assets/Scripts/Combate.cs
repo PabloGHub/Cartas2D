@@ -74,9 +74,9 @@ public class Combate : MonoBehaviour
         _tiempo_f--;
         _barraTiempo_image.fillAmount = _tiempo_f / _maxTiempo_f;
 
-        if (_tiempo_f < 0)
+        if (_tiempo_f <= 0)
         {
-            _tiempo_f = _maxTiempo_f;
+            _tiempo_f = _maxTiempo_f + 1;
             siguienteTurno();
         }
     }
