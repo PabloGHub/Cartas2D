@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
 
         if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo"))
         {
-            _audioSource_as ==
+            //_audioSource_as;
         }
     }
 
