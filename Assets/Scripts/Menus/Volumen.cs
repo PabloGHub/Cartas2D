@@ -25,11 +25,13 @@ public class Volumen : MonoBehaviour // Bonito es B
     {
         // Musica
         sliderMusica.value = PlayerPrefs.GetFloat("VolumenMusica", 0.5f);
+        imagenMuteMusica.SetActive(false);
         cambiarMusica(sliderMusica.value);
 
         // Efectos
         sliderEfectos.value = PlayerPrefs.GetFloat("VolumenEfectos", 0.5f);
-        cambiarEfectos(sliderMusica.value);
+        imagenMuteEfectos.SetActive(false);
+        cambiarEfectos(sliderEfectos.value);
     }
 
 
