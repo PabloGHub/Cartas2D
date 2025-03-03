@@ -11251,7 +11251,7 @@ MonoBehaviour:
   slider: {fileID: 283495728}
   sliderValue: 0
   imagenMute: {fileID: 562481343}
-  audioMixer: {fileID: 24100000, guid: 75b0658030bec3b4392c3aecbea3bcd4, type: 2}
+  audioMixer: {fileID: 0}
 --- !u!4 &1700854477
 Transform:
   m_ObjectHideFlags: 0
@@ -11280,7 +11280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1545531631}
-  sliderValue: 0
+  sliderValue: 50
   panelBrillo: {fileID: 0}
   valorBlack: 0
   valorWhite: 0
