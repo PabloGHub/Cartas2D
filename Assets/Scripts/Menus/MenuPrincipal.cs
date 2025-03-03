@@ -9,7 +9,8 @@ public class MenuPrincipal : MonoBehaviour
     void Start()
     {
         //panelOpciones.SetActive(false);
-        _animatorOpciones_anim = panelOpciones.GetComponent<Animator>();
+        if (panelOpciones != null)
+            _animatorOpciones_anim = panelOpciones.GetComponent<Animator>();
     }
 
     public void Iniciar()
