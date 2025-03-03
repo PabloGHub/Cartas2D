@@ -67,7 +67,7 @@ public class Volumen : MonoBehaviour // Bonito es B
         else
             audioMixer.SetFloat("SFXVOL", -80);
 
-        RevisarSiEstoyMuteMusica();
+        RevisarSiEstoyMuteEfectos();
     }
 
 
