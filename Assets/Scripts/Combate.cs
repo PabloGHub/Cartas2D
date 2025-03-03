@@ -104,7 +104,7 @@ public class Combate : MonoBehaviour
             case 3:
                 if (_pilar3_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    if (_pilar3_go.GetComponent<Carta>() != null)
+                    if (_pilar3_go.GetComponentInChildren<Carta>() != null)
                     {
                         Carta _carta = _pilar3_go.GetComponentInChildren<Carta>();
                         if (_carta._accion_i == 0)
@@ -117,7 +117,7 @@ public class Combate : MonoBehaviour
             case 2:
                 if (_pilar2_go.GetComponent<Pilar>()._cartaEncima_b)
                 {
-                    if (_pilar2_go.GetComponent<Carta>() != null)
+                    if (_pilar2_go.GetComponentInChildren<Carta>() != null)
                     {
                         Carta _carta = _pilar2_go.GetComponentInChildren<Carta>();
                         if (_carta._accion_i == 0)
@@ -219,11 +219,6 @@ public class Combate : MonoBehaviour
         if (_pilar4_go.activeInHierarchy) _pilaresActivos_i++;
     }
 
-    void activarPilar(GameObject _pilar_go)
-    {
-        _pilar_go.SetActive(true);
-    }
-
     public void siguientePialar()
     {
         comprobarPialres();
@@ -242,6 +237,10 @@ public class Combate : MonoBehaviour
                 activarPilar(_pilar4_go);
             break;
         }
+    }
+    void activarPilar(GameObject _pilar_go)
+    {
+        _pilar_go.SetActive(true);
     }
 
 
