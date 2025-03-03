@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     // --- variables de Audio --- //
     AudioSource _audioSource_as;
     [SerializeField] private AudioClip _sonidoSalto;
-    [SerializeField] private AudioClip _sonidoCaminar;
+    private AudioClip _sonidoCaminar;
     [SerializeField] private AudioClip _sonidoMoneda;
 
     // --- variables de esquinas --- //
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         _inputBuffer_q = new Queue<KeyCode>();
         _inputBufferSalto_q = new Queue<KeyCode>();
         _animator_a = gameObject.GetComponent<Animator>();
-        _audioSource_as = GetComponent<AudioSource>();
+        _audioSource_as = GetComponentInParent<AudioSource>();
     }
 
     void Update()
@@ -124,7 +124,10 @@ public class Player : MonoBehaviour
 
         if (_animator_a.GetBool("moviendose") && _animator_a.GetBool("tocandoSuelo") && !_audioSource_as.isPlaying)
         {
-            _audioSource_as.PlayOneShot(_sonidoCaminar, 0.7f);
+            if (_audioSource_as != null && _audioSource_as.clip != null)
+            {
+                _audioSource_as.Play();
+            }
         }
     }
 
