@@ -22,8 +22,16 @@ public class MenuPrincipal : MonoBehaviour
     {
         //panelOpciones.SetActive(true);
 
-        _animatorOpciones_anim.SetBool("aparecer", true);
-        _animatorOpciones_anim.SetBool("irse", false);
+        if (_animatorOpciones_anim.GetBool("aparecer") && !_animatorOpciones_anim.GetBool("irse"))
+        {
+            _animatorOpciones_anim.SetBool("aparecer", true);
+            _animatorOpciones_anim.SetBool("irse", false);
+        }
+        else if (!_animatorOpciones_anim.GetBool("aparecer") && _animatorOpciones_anim.GetBool("irse"))
+        {
+            _animatorOpciones_anim.SetBool("aparecer", false);
+            _animatorOpciones_anim.SetBool("irse", true);
+        }
     }
 
     public void CerrarOpciones()
