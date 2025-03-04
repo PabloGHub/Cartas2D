@@ -424,9 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7720aaae0fca64781633c265662cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objeto_go: {fileID: 0}
+  _objetoAbsorbido_go: {fileID: 0}
   _contadorMonedas_tp: {fileID: 5655404837447797728}
   _cantidadMonedas_i: 0
+  _nivel_i: 1
   _puesto1_go: {fileID: 6566198088676806625}
   _puesto2_go: {fileID: 4506732397963681446}
   _puesto3_go: {fileID: 760303225511347035}
@@ -465,7 +466,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -3.9695506, y: -0.61500573}
+  m_Offset: {x: -4, y: -0.61500573}
   m_Radius: 0.90482044
 --- !u!1 &6962184873740221388
 GameObject:
@@ -501,8 +502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.0023}
+  m_SizeDelta: {x: 1, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7746951072652773395
 CanvasRenderer:

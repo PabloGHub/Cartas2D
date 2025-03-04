@@ -25,15 +25,12 @@ public class Volumen : MonoBehaviour // Bonito es B
     {
         // Musica
         sliderMusica.value = PlayerPrefs.GetFloat("VolumenMusica", 0.5f);
-        imagenMuteMusica.SetActive(false);
         cambiarMusica(sliderMusica.value);
 
         // Efectos
         sliderEfectos.value = PlayerPrefs.GetFloat("VolumenEfectos", 0.5f);
-        imagenMuteEfectos.SetActive(false);
         cambiarEfectos(sliderEfectos.value);
     }
-
 
     public void cambiarMusica(float valor)
     {
@@ -49,6 +46,7 @@ public class Volumen : MonoBehaviour // Bonito es B
 
         RevisarSiEstoyMuteMusica();
     }
+
     public void cambiarEfectos(float valor)
     {
         sliderValueEfectos = valor;
@@ -64,7 +62,6 @@ public class Volumen : MonoBehaviour // Bonito es B
         RevisarSiEstoyMuteEfectos();
     }
 
-
     private void RevisarSiEstoyMuteMusica()
     {
         if (sliderValueMusica <= 0)
@@ -76,6 +73,7 @@ public class Volumen : MonoBehaviour // Bonito es B
             imagenMuteMusica.SetActive(false);
         }
     }
+
     private void RevisarSiEstoyMuteEfectos()
     {
         if (sliderValueEfectos <= 0)
