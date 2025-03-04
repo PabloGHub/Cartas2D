@@ -38,6 +38,10 @@ public class Volumen : MonoBehaviour // Bonito es B
 
         PlayerPrefs.SetFloat("VolumenMusica", valor);
         PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("VolumenMusica", valor);
+        PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("VolumenMusica", valor);
+        PlayerPrefs.Save();
 
         if (valor > 0)
             audioMixer.SetFloat("MurciaVOL", 20 * (float)Math.Log10(valor));
@@ -51,6 +55,10 @@ public class Volumen : MonoBehaviour // Bonito es B
     {
         sliderValueEfectos = valor;
 
+        PlayerPrefs.SetFloat("VolumenEfectos", valor);
+        PlayerPrefs.Save();
+        PlayerPrefs.SetFloat("VolumenEfectos", valor);
+        PlayerPrefs.Save();
         PlayerPrefs.SetFloat("VolumenEfectos", valor);
         PlayerPrefs.Save();
 

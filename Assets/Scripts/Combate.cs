@@ -38,6 +38,8 @@ public class Combate : MonoBehaviour
     int _daño_i = 0; 
     int _enemigosAbatidos_i = 0;
 
+    ControladorDatos _controladorDatos_script;
+
     // --- Declaraciones Tienda --- //
     [SerializeField]
     Tienda _tienda_script;
@@ -57,6 +59,13 @@ public class Combate : MonoBehaviour
         _salud_f = _maxSalud_f;
         _enemigo_f = _maxEnemigo_f;
         _tiempo_f = _maxTiempo_f;
+
+        _controladorDatos_script = GetComponent<ControladorDatos>();
+        if (_controladorDatos_script.DarmeMenedas() > 0)
+        {
+            intanciarMenedas(_controladorDatos_script.DarmeMenedas());
+            _controladorDatos_script.Menedas0();
+        }
 
         actulizarCartel();
     }
@@ -170,6 +179,9 @@ public class Combate : MonoBehaviour
                 _maxEnemigo_f += 10;
                 _maxSalud_f += 10;
                 _maxTiempo_f++;
+
+                _controladorDatos_script.ComprobarNivel(_nivel_i);
+                _controladorDatos_script.SumarMeneda();
             }
             _enemigo_f = _maxEnemigo_f;
 

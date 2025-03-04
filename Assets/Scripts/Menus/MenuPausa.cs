@@ -18,15 +18,8 @@ public class MenuPausa : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            AbrirOpciones();
-        }
-    }
 
-    public void AbrirOpciones()
+    public void AbrirMenu()
     {
         if (_animatorOpciones_anim.GetBool("aparecer") && !_animatorOpciones_anim.GetBool("irse"))
         {
@@ -38,10 +31,17 @@ public class MenuPausa : MonoBehaviour
             _animatorOpciones_anim.SetBool("aparecer", true);
             _animatorOpciones_anim.SetBool("irse", false);
         }
+
+        _jugador._pausado_b = !_jugador._pausado_b;
     }
 
     public void Reiniciar()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void irMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

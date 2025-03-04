@@ -7,7 +7,9 @@ using System;
 public class Player : MonoBehaviour
 {
     // ***********************( Declaraciones )*********************** //
+    // --- pausa --- //
     public bool _pausado_b = false;
+    public MenuPausa _menuPausa_script;
 
     // --- InputBuffer --- //
     Queue<KeyCode> _inputBuffer_q;
@@ -76,7 +78,7 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _pausado_b = _pausado_b ? false : true;
+            _menuPausa_script.AbrirMenu();
             //Time.timeScale = _pausado_b ? 0 : 1;
             return;
         }
