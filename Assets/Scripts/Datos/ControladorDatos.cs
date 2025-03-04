@@ -22,14 +22,13 @@ public class ControladorDatos : MonoBehaviour
         if (_maximoNivel_text != null)
             _maximoNivel_text.text = "Maximo Nivel: " + DarmeNivel().ToString();
 
-        if (_menedas_text != null)
-            _menedas_text.text = "Menedas Extra: " + DarmeMenedas().ToString();
     }
 
 
     void Update()
     {
-        
+        if (_menedas_text != null)
+            _menedas_text.text = "Menedas Extra: " + DarmeMenedas().ToString();
     }
 
     // --------------------- Metodos Nuestros --------------------- //
@@ -56,6 +55,9 @@ public class ControladorDatos : MonoBehaviour
         _datosJuga_dj.cantidadMenedas = 0;
         _acceso_aj.darDatos(_datosJuga_dj);
         */
+
+        PlayerPrefs.SetInt("Menedas", 0);
+        PlayerPrefs.Save();
     }
     public int DarmeMenedas()
     {

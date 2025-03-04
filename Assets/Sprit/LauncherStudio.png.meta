@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: aad7a4c0c1f2e0e489aac4aa519d9820
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7581344353203822777
+    second: LauncherStudio_0
+  - first:
+      213: 1594815510718526449
+    second: LauncherStudio_1
+  - first:
+      213: -4594909089772803678
+    second: LauncherStudio_2
+  - first:
+      213: -490943675239519299
+    second: LauncherStudio_3
+  - first:
+      213: 7216120664726591854
+    second: LauncherStudio_4
+  - first:
+      213: 6652855044970893591
+    second: LauncherStudio_5
+  - first:
+      213: 6529323898917420729
+    second: LauncherStudio_6
+  - first:
+      213: 8178694792718400396
+    second: LauncherStudio_7
+  - first:
+      213: 5743593953324042713
+    second: LauncherStudio_8
+  - first:
+      213: 6574240166620723096
+    second: LauncherStudio_9
+  - first:
+      213: -6514000299375698327
+    second: LauncherStudio_10
+  - first:
+      213: 8206737256362881359
+    second: LauncherStudio_11
+  - first:
+      213: -8537899936676397453
+    second: LauncherStudio_12
+  - first:
+      213: -4850845904564282956
+    second: LauncherStudio_13
+  - first:
+      213: 3322066932328251722
+    second: LauncherStudio_14
+  - first:
+      213: -417524314611468423
+    second: LauncherStudio_15
+  - first:
+      213: 4051115064903148883
+    second: LauncherStudio_16
+  - first:
+      213: -6078841826969868088
+    second: LauncherStudio_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LauncherStudio_0
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 557
+        width: 69
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74f5f5b7a77a9c690800000000000000
+      internalID: -7581344353203822777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_1
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 557
+        width: 74
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f339aed14ce12610800000000000000
+      internalID: 1594815510718526449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_2
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 557
+        width: 74
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9e0e8178a9b30c0800000000000000
+      internalID: -4594909089772803678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_3
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 556
+        width: 81
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbbaf981451df29f0800000000000000
+      internalID: -490943675239519299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_4
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 556
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e69526d038fc42460800000000000000
+      internalID: 7216120664726591854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_5
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 557
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711d7a14a60b35c50800000000000000
+      internalID: 6652855044970893591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_6
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 556
+        width: 74
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bef0720e71dc9a50800000000000000
+      internalID: 6529323898917420729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_7
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 557
+        width: 84
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8b3156d49f808170800000000000000
+      internalID: 8178694792718400396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_8
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 556
+        width: 84
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d906f9054855bf40800000000000000
+      internalID: 5743593953324042713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_9
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 557
+        width: 61
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 897788789946c3b50800000000000000
+      internalID: 6574240166620723096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_10
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 395
+        width: 71
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96e5ce88d3f9995a0800000000000000
+      internalID: -6514000299375698327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_11
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 395
+        width: 51
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f413972bd0034e170800000000000000
+      internalID: 8206737256362881359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_12
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 395
+        width: 74
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37eb29a4e39438980800000000000000
+      internalID: -8537899936676397453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_13
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 490
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b99946c9555eacb0800000000000000
+      internalID: -4850845904564282956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_14
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 395
+        width: 71
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a414f7d164a5a1e20800000000000000
+      internalID: 3322066932328251722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_15
+      rect:
+        serializedVersion: 2
+        x: 1353
+        y: 396
+        width: 16
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 977be7619d7a43af0800000000000000
+      internalID: -417524314611468423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_16
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 395
+        width: 77
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35529c310b3783830800000000000000
+      internalID: 4051115064903148883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LauncherStudio_17
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 395
+        width: 61
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c8aca1c09d93aba0800000000000000
+      internalID: -6078841826969868088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LauncherStudio_0: -7581344353203822777
+      LauncherStudio_1: 1594815510718526449
+      LauncherStudio_10: -6514000299375698327
+      LauncherStudio_11: 8206737256362881359
+      LauncherStudio_12: -8537899936676397453
+      LauncherStudio_13: -4850845904564282956
+      LauncherStudio_14: 3322066932328251722
+      LauncherStudio_15: -417524314611468423
+      LauncherStudio_16: 4051115064903148883
+      LauncherStudio_17: -6078841826969868088
+      LauncherStudio_2: -4594909089772803678
+      LauncherStudio_3: -490943675239519299
+      LauncherStudio_4: 7216120664726591854
+      LauncherStudio_5: 6652855044970893591
+      LauncherStudio_6: 6529323898917420729
+      LauncherStudio_7: 8178694792718400396
+      LauncherStudio_8: 5743593953324042713
+      LauncherStudio_9: 6574240166620723096
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
