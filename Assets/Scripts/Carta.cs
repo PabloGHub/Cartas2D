@@ -10,6 +10,7 @@ public class Carta : MonoBehaviour
     public bool _vendiendose_b = false;
     public int _rango_i = 4;
     public float _cantidad_f = 0f;
+    public bool forzarAtaque = false;
 
     // Privados visibles.
     [SerializeField]
@@ -22,7 +23,11 @@ public class Carta : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _accion_i = Random.Range(0, _rango_i);
+        if (forzarAtaque)
+            _accion_i = 1;
+        else
+            _accion_i = Random.Range(0, _rango_i);
+        
 
         if (_accion_i == 0)
         {

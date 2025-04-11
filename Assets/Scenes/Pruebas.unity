@@ -263,6 +263,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
+      propertyPath: forzarAtaque
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
       propertyPath: _vendiendose_b
       value: 0
       objectReference: {fileID: 0}
@@ -1283,7 +1287,7 @@ MonoBehaviour:
   _barraEnemigo_image: {fileID: 1039072710}
   _barraTiempo_image: {fileID: 200996024}
   _maxSalud_f: 30
-  _maxEnemigo_f: 20
+  _maxSaludEnemigo_f: 20
   _maxTiempo_f: 5
   _pilar1_go: {fileID: 8636595}
   _pilar2_go: {fileID: 1655430020313013773}
@@ -3098,6 +3102,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
+      propertyPath: forzarAtaque
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
       propertyPath: _vendiendose_b
       value: 0
       objectReference: {fileID: 0}
@@ -4558,6 +4566,10 @@ PrefabInstance:
     - target: {fileID: 8014162167328901560, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
+      propertyPath: forzarAtaque
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9157033126491009451, guid: 4bf34857d52ed414fa0d0fa0664ba075, type: 3}
       propertyPath: _vendiendose_b

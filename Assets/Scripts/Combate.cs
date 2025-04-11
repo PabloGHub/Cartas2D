@@ -11,20 +11,21 @@ public class Combate : MonoBehaviour
     [SerializeField] Image _barraEnemigo_image;
     [SerializeField] Image _barraTiempo_image;
 
-    public float _maxSalud_f = 30;
-    public float _maxEnemigo_f = 20;
-    public float _maxTiempo_f = 21;
+    public float _maxSalud_f = 20;
+    public float _maxSaludEnemigo_f = 20;
+    public float _maxTiempo_f = 5;
 
-    float _salud_f;
-    float _enemigo_f;
-    float _tiempo_f;
+    private float _salud_f;
+    private float _saludEnemigo_f;
+    private float _tiempo_f;
+
 
     // --- Delaciones de Pilares --- //
-    [SerializeField] GameObject _pilar1_go;
-    [SerializeField] GameObject _pilar2_go;
-    [SerializeField] GameObject _pilar3_go;
-    [SerializeField] GameObject _pilar4_go;
-    int _pilaresActivos_i = 0;
+    [SerializeField] private GameObject _pilar1_go;
+    [SerializeField] private GameObject _pilar2_go;
+    [SerializeField] private GameObject _pilar3_go;
+    [SerializeField] private GameObject _pilar4_go;
+    private int _pilaresActivos_i = 0;
 
 
     // --- Declaraciones del Combate --- //
@@ -34,31 +35,35 @@ public class Combate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _TextoNivel_text;
 
     public int _nivel_i = 1;
-    float _dañoEnemigo_f = 1f;
-    int _daño_i = 0; 
-    int _enemigosAbatidos_i = 0;
+    private float _dañoMinimo_f;
+    private float _dañoEnemigo_f = 1f;
+    private int _daño_i = 0; 
+    private int _enemigosAbatidos_i = 0;
 
-    ControladorDatos _controladorDatos_script;
+    private ControladorDatos _controladorDatos_script;
+
 
     // --- Declaraciones Tienda --- //
     [SerializeField]
-    Tienda _tienda_script;
+    private Tienda _tienda_script;
     [SerializeField]
-    GameObject _PrefabMeneda_go;
+    private GameObject _PrefabMeneda_go;
+
 
     // --- Declaraciones de Reloj --- //
     [SerializeField]
-    Player _player_script;
-    float _tiempoReloj_f = 0;
-    int _segundos_i = 0;
+    private Player _player_script;
+    private float _tiempoReloj_f = 0;
+    private int _segundos_i = 0;
 
 
     // ***********************( Metodos de UNITY )*********************** //
     void Start()
     {
         _salud_f = _maxSalud_f;
-        _enemigo_f = _maxEnemigo_f;
+        _saludEnemigo_f = _maxSaludEnemigo_f;
         _tiempo_f = _maxTiempo_f;
+        _dañoMinimo_f = _dañoEnemigo_f;
 
         _controladorDatos_script = GetComponent<ControladorDatos>();
         if (_controladorDatos_script.DarmeMenedas() > 0)
@@ -154,7 +159,7 @@ public class Combate : MonoBehaviour
         }
 
         _daño_i = (int)_dannoAcer_f;
-        _enemigo_f -= _daño_i;
+        _saludEnemigo_f -= _daño_i;
 
         _salud_f -= _dañoEnemigo_f;
         _salud_f += _saludAcer_f;
@@ -164,30 +169,56 @@ public class Combate : MonoBehaviour
 
         actulizarCartel();
 
+        // Aqui Morir
         if (_salud_f <= 0)
         {
             Debug.Log("LLevar a muerte");
             SceneManager.LoadScene(2);
         }
 
-        if (_enemigo_f <= 0)
+        // Aqui Enemigo muere
+        if (_saludEnemigo_f <= 0)
         {
+            Debug.Log("Enemigo Abatido");
+
             _enemigosAbatidos_i++;
             if (_enemigosAbatidos_i % 2 == 0)
             {
                 _nivel_i++;
-                _maxEnemigo_f += 10;
+                _maxSaludEnemigo_f += 10;
                 _maxSalud_f += 10;
                 _maxTiempo_f++;
 
                 _controladorDatos_script.ComprobarNivel(_nivel_i);
                 _controladorDatos_script.SumarMeneda();
             }
-            _enemigo_f = _maxEnemigo_f;
+
+            _saludEnemigo_f = _maxSaludEnemigo_f;
 
             intanciarMenedas(_dañoEnemigo_f);
 
-            _dañoEnemigo_f += _nivel_i;
+
+            int _dañoMaximo_i = _nivel_i + (_nivel_i * 3);
+            if (_dañoMinimo_f >= _dañoMaximo_i)
+            {
+                _dañoEnemigo_f = _dañoMaximo_i;
+            }
+            else
+            {
+                _dañoEnemigo_f = _nivel_i + (_nivel_i * Random.Range(1, 4));
+                while (_dañoEnemigo_f <= _dañoMinimo_f)
+                    _dañoEnemigo_f = _nivel_i + (_nivel_i * Random.Range(1, 4));
+            }
+            _dañoMinimo_f = _dañoEnemigo_f;
+
+
+            Debug.Log
+            (
+                "-- Daño del Enemigo --" +
+                "\nDaño Maximo: " + _dañoMaximo_i +
+                "\nDaño Minimo: " + _dañoMinimo_f +
+                "\nDaño Enemigo: " + _dañoEnemigo_f
+            );
         }
 
         _tienda_script.siguienteRonda();
@@ -200,16 +231,16 @@ public class Combate : MonoBehaviour
     void actulizarCartel()
     {
         _barraSalud_image.fillAmount = _salud_f / _maxSalud_f;
-        _barraEnemigo_image.fillAmount = _enemigo_f / _maxEnemigo_f;
+        _barraEnemigo_image.fillAmount = _saludEnemigo_f / _maxSaludEnemigo_f;
 
         _TextoDañoEnemigo_text.text = _dañoEnemigo_f.ToString();
         _TextoSalud_text.text = _salud_f.ToString();
-        _TextoEnemigo_text.text = _enemigo_f.ToString();
+        _TextoEnemigo_text.text = _saludEnemigo_f.ToString();
     }
 
     public void intanciarMenedas(float _cantidad_f)
     {
-        int _cantidad_i = ((int)((_cantidad_f / 2) + 0.25f)) + 1;
+        int _cantidad_i = ((int)((_cantidad_f / 2) + 0.20f)) + 1;
         for (int i = 0; i <= _cantidad_i; i++)
         {
             Vector3 _posicion_v3;
@@ -221,6 +252,7 @@ public class Combate : MonoBehaviour
             Instantiate(_PrefabMeneda_go, _posicion_v3, Quaternion.identity);
         }
             
+        Debug.Log("Menedas Instanciadas: " + _cantidad_i);
     }
 
     // --- Sistema de Pilares --- //
@@ -232,6 +264,8 @@ public class Combate : MonoBehaviour
         if (_pilar2_go.activeInHierarchy) _pilaresActivos_i++;
         if (_pilar3_go.activeInHierarchy) _pilaresActivos_i++;
         if (_pilar4_go.activeInHierarchy) _pilaresActivos_i++;
+
+        //Debug.Log("Pilares Activos: " + _pilaresActivos_i);
     }
 
     public void siguientePialar()
@@ -242,14 +276,17 @@ public class Combate : MonoBehaviour
         {
             case 1:
                 activarPilar(_pilar2_go);
+                Debug.Log("Activando Pilar 2");
             break;
 
             case 2:
                 activarPilar(_pilar3_go);
+                Debug.Log("Activando Pilar 3");
             break;
 
             case 3:
                 activarPilar(_pilar4_go);
+                Debug.Log("Activando Pilar 4");
             break;
         }
     }
